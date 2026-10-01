@@ -3,7 +3,7 @@
 import { SiteNav, SiteFooter } from "../../components/site";
 import { Button, SectionHead, Reveal, Badge } from "../../components/ui";
 
-const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "";
+const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "https://github.com/Tabi02/munimai-website/releases/download/aetros-biz-0.2.0/aetros-biz-0.2.0-win-portable.zip";
 
 const STEPS = [
   { t: "Download the portable ZIP", d: "One file, about 220 MB. No installer, no admin rights needed." },

@@ -6,7 +6,7 @@ import { api, formatINR, type Subscription, type Device } from "../../lib/api";
 import { Button, Badge, PageSkeleton } from "../../components/ui";
 import { IconCheck } from "../../components/icons";
 
-const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "";
+const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "https://github.com/Tabi02/munimai-website/releases/download/aetros-biz-0.2.0/aetros-biz-0.2.0-win-portable.zip";
 
 function statusTone(status: string): "green" | "amber" | "red" | "gray" {
   if (status === "active") return "green";
