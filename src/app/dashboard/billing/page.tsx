@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../lib/auth";
 import { api, formatINR, type Plan, type Subscription } from "../../../lib/api";
-import { Button, Card, Spinner, StatusBadge } from "../../../components/ui";
+import { Button, Badge, PageSkeleton } from "../../../components/ui";
 
 export default function BillingPage() {
   const { accessToken } = useAuth();
@@ -66,79 +66,85 @@ export default function BillingPage() {
     setBusy(null);
   };
 
-  if (loading) return <Spinner />;
+  if (loading) return <PageSkeleton />;
 
   return (
     <>
-      <h1 style={{ fontSize: 30, marginBottom: 4 }}>Billing</h1>
-      <p className="muted">Plans are per organization, billed in INR. Cancel anytime — data is never deleted.</p>
-      {error && <div className="form-error mt">{error}</div>}
+      <div className="page-head">
+        <div>
+          <p className="dash-crumb">Account</p>
+          <h1>Billing</h1>
+          <p className="faint">Plans are per organization, billed in INR. Cancel anytime. Data is never deleted.</p>
+        </div>
+        <Button variant="secondary" size="sm" onClick={portal} disabled={busy === "portal"}>
+          {busy === "portal" ? "Opening…" : "Payment methods"}
+        </Button>
+      </div>
+
+      {error && <div className="auth-error" role="alert">{error}</div>}
 
       {sub && (
-        <Card className="mt">
-          <div className="row-between">
-            <div>
-              <div className="card-title">Current plan: {sub.plan_name}</div>
-              <p className="card-sub" style={{ margin: 0 }}>
-                <StatusBadge status={sub.status} />&nbsp;&nbsp;
-                {formatINR(sub.price_cents)} / {sub.billing_interval === "month" ? "month" : "year"} ·
-                renews {new Date(sub.current_period_end).toLocaleDateString("en-IN")}
-              </p>
-            </div>
-            <div style={{ display: "flex", gap: 10 }}>
-              <Button variant="ghost" size="sm" onClick={portal} disabled={busy === "portal"}>
-                {busy === "portal" ? "Opening…" : "Payment methods"}
+        <section className="section-tight" style={{ paddingTop: 0 }}>
+          <h2 style={{ fontSize: 20, marginBottom: 12 }}>Current plan</h2>
+          <dl style={{ margin: 0 }}>
+            <div className="kv"><dt>Plan</dt><dd><strong>{sub.plan_name}</strong> <Badge tone={sub.status === "active" ? "green" : sub.status === "trialing" ? "amber" : "gray"}>{sub.status}</Badge></dd></div>
+            <div className="kv"><dt>Price</dt><dd className="mono">{formatINR(sub.price_cents)} / {sub.billing_interval === "month" ? "month" : "year"}</dd></div>
+            <div className="kv"><dt>Renews</dt><dd>{new Date(sub.current_period_end).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</dd></div>
+            {sub.cancel_at_period_end && (
+              <div className="kv"><dt>Cancellation</dt><dd>Scheduled at period end. Everything keeps working until then.</dd></div>
+            )}
+          </dl>
+          {!sub.cancel_at_period_end && sub.status !== "trialing" && (
+            <div style={{ marginTop: 16 }}>
+              <Button variant="danger" size="sm" onClick={cancel} disabled={busy === "cancel"}>
+                {busy === "cancel" ? "Cancelling…" : "Cancel plan"}
               </Button>
-              {!sub.cancel_at_period_end && sub.status !== "trialing" && (
-                <Button variant="danger-ghost" size="sm" onClick={cancel} disabled={busy === "cancel"}>
-                  {busy === "cancel" ? "Cancelling…" : "Cancel plan"}
-                </Button>
-              )}
             </div>
-          </div>
-          {sub.cancel_at_period_end && (
-            <p className="muted mt" style={{ marginBottom: 0 }}>
-              Scheduled to cancel at period end. Everything keeps working until then.
-            </p>
           )}
-        </Card>
+        </section>
       )}
 
-      <div className="grid grid-3 mt">
-        {plans.map((p, i) => {
-          const current = sub?.plan_slug === p.slug;
-          return (
-            <Card key={p.id} className={`price-card${i === 1 ? " popular" : ""}`}>
-              {i === 1 && <span className="price-flag">Most popular</span>}
-              <div className="card-title">{p.name}</div>
-              <div className="price-amount">{formatINR(p.price_cents)}</div>
-              <div className="price-per">per month · {p.device_limit} device{p.device_limit > 1 ? "s" : ""}</div>
-              <ul className="price-list">
-                {p.features.length
-                  ? p.features.map((f) => <li key={f.key}>{f.label}{f.limit ? ` (${f.limit})` : ""}</li>)
-                  : <><li>{p.trial_days}-day free trial</li><li>Offline-capable desktop app</li><li>AI-assisted workflows</li></>}
-              </ul>
-              <div style={{ marginTop: "auto" }}>
-                {current ? (
-                  <span className="badge badge-green"><span className="dot" />Current plan</span>
-                ) : (
-                  <Button
-                    variant={i === 1 ? "primary" : "ghost"}
-                    disabled={busy === p.id}
-                    onClick={() => checkout(p.id)}
-                  >
-                    {busy === p.id ? "Redirecting…" : sub?.status === "trialing" ? "Start subscription" : "Switch to " + p.name}
-                  </Button>
-                )}
-              </div>
-            </Card>
-          );
-        })}
-      </div>
-      <p className="muted mt" style={{ fontSize: 13 }}>
-        Payments are processed securely by our billing provider. A successful payment page alone never
-        activates anything — your subscription updates only after the provider confirms it.
-      </p>
+      <section className="section-tight" style={{ borderTop: "1px solid var(--line)", paddingTop: 32 }}>
+        <h2 style={{ fontSize: 20, marginBottom: 4 }}>Plans</h2>
+        <p className="faint" style={{ marginBottom: 16 }}>Every plan includes the full product and a 14-day free trial.</p>
+        {plans.length === 0 ? (
+          <p className="faint">Plans could not be loaded. The billing API may be offline.</p>
+        ) : (
+          <div>
+            {plans.map((p) => {
+              const current = sub?.plan_slug === p.slug;
+              return (
+                <div className="mod-row" key={p.id} style={{ cursor: "default" }}>
+                  <span className="mod-name">{p.name} {current && <Badge tone="green">Current</Badge>}</span>
+                  <p className="mod-desc">
+                    <span className="mono" style={{ fontSize: 16, fontWeight: 600, color: "var(--ink)" }}>{formatINR(p.price_cents)}</span>
+                    <span className="faint"> per month · {p.device_limit} device{p.device_limit > 1 ? "s" : ""}</span><br />
+                    {p.features.length
+                      ? p.features.map((f) => `${f.label}${f.limit ? ` (${f.limit})` : ""}`).join(" · ")
+                      : `${p.trial_days}-day free trial · Offline-capable desktop app · AI-assisted workflows`}
+                  </p>
+                  <span className="mod-meta">
+                    {!current && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        disabled={busy === p.id}
+                        onClick={() => checkout(p.id)}
+                      >
+                        {busy === p.id ? "Redirecting…" : sub?.status === "trialing" ? "Start subscription" : `Switch to ${p.name}`}
+                      </Button>
+                    )}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+        <p className="small faint" style={{ marginTop: 20 }}>
+          Payments are processed securely by our billing provider. A successful payment page alone never
+          activates anything. Your subscription updates only after the provider confirms it.
+        </p>
+      </section>
     </>
   );
 }

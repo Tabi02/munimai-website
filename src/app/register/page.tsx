@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../lib/auth";
 import { ApiError } from "../../lib/api";
-import { Button, Card, Field } from "../../components/ui";
+import { Button, Field } from "../../components/ui";
+import { Wordmark } from "../../components/site";
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -42,40 +43,44 @@ export default function RegisterPage() {
 
   return (
     <div className="auth-wrap">
-      <div className="hero-glow" />
-      <Card className="auth-card" >
-        <Link href="/" className="brand" style={{ marginBottom: 26, display: "inline-flex" }}>
-          <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" style={{ width: 30, height: 30 }} /> MunimAI OS
+      <div className="auth-side">
+        <Link href="/" aria-label="MunimAI OS home" style={{ display: "inline-block", marginBottom: 32 }}>
+          <Wordmark />
         </Link>
-        <h1>Start your trial</h1>
-        <p className="muted" style={{ marginBottom: 26 }}>14 days free on every plan. No credit card required.</p>
-        {error && <div className="form-error">{error}</div>}
-        <form onSubmit={submit}>
-          <Field label="Your name">
-            <input className="input" required placeholder="Aarav Sharma" value={form.displayName} onChange={set("displayName")} autoComplete="name" />
-          </Field>
-          <Field label="Company / organization">
-            <input className="input" required placeholder="Sharma Traders" value={form.organizationName} onChange={set("organizationName")} autoComplete="organization" />
-          </Field>
-          <Field label="Work email">
-            <input className="input" type="email" required placeholder="you@company.com" value={form.email} onChange={set("email")} autoComplete="email" />
-          </Field>
-          <Field label="Password">
-            <input className="input" type="password" required placeholder="Min. 10 characters" value={form.password} onChange={set("password")} autoComplete="new-password" />
-          </Field>
-          <Button type="submit" disabled={busy}>
-            <span style={{ width: "100%" }}>{busy ? "Creating account…" : "Create account"}</span>
-          </Button>
-        </form>
-        <div className="divider" />
-        <p className="muted" style={{ textAlign: "center", margin: 0 }}>
-          Just exploring? <Link href="/login" style={{ color: "var(--accent-2)", fontWeight: 600 }}>Try the demo account</Link> — no signup needed.
-        </p>
-        <div className="divider" />
-        <p className="muted" style={{ textAlign: "center", margin: 0 }}>
-          Already have an account? <Link href="/login" style={{ color: "var(--accent-2)", fontWeight: 600 }}>Sign in</Link>
-        </p>
-      </Card>
+        <h1>Start your trial.</h1>
+        <p>14 days free on every plan. No credit card required.</p>
+        <ul className="auth-points">
+          <li><strong>Full product, not a demo</strong>Every module and all seven AI specialists are included from day one.</li>
+          <li><strong>Your data, your machine</strong>The database lives on your computer. Cancel any time and keep everything.</li>
+          <li><strong>Honest pricing</strong>Prices adapt to your country. See the full table before you commit.</li>
+        </ul>
+      </div>
+      <div className="auth-form-col">
+        <div className="auth-card">
+          <h2>Create your account</h2>
+          <p className="faint" style={{ marginBottom: 24 }}>One account manages your license, devices and billing.</p>
+          {error && <div className="auth-error" role="alert">{error}</div>}
+          <form onSubmit={submit}>
+            <Field label="Your name">
+              <input className="input" required value={form.displayName} onChange={set("displayName")} autoComplete="name" />
+            </Field>
+            <Field label="Business name">
+              <input className="input" required value={form.organizationName} onChange={set("organizationName")} autoComplete="organization" />
+            </Field>
+            <Field label="Work email">
+              <input className="input" type="email" required value={form.email} onChange={set("email")} autoComplete="email" />
+            </Field>
+            <Field label="Password" hint="Minimum 10 characters.">
+              <input className="input" type="password" required value={form.password} onChange={set("password")} autoComplete="new-password" />
+            </Field>
+            <Button type="submit" block disabled={busy}>{busy ? "Creating account…" : "Create account"}</Button>
+          </form>
+          <p className="small faint" style={{ marginTop: 16 }}>
+            By creating an account you agree to the <Link href="/terms">Terms of Service</Link> and <Link href="/privacy">Privacy Policy</Link>.
+          </p>
+          <p className="auth-alt">Already have an account? <Link href="/login">Sign in</Link></p>
+        </div>
+      </div>
     </div>
   );
 }

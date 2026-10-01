@@ -1,18 +1,40 @@
 import type { Metadata } from "next";
+import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { AuthProvider } from "../lib/auth";
 import "./globals.css";
 
+const display = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const sans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "MunimAI OS — Aapka AI Munim",
+  title: "MunimAI OS | Business Operating System",
   description:
-    "MunimAI OS aapki invoicing, inventory aur customers ko locally chalata hai — AI ke saath. No cloud lock-in. Aapka data aapke paas.",
+    "MunimAI OS is a business operating system for customers, sales, inventory, finance and AI-assisted workflows. Local-first desktop software with honest licensing.",
   icons: { icon: "/favicon.png" },
   verification: { google: "bx5m2MX3zJM3fhIEIfUisjmtKO4ip2kAeTGdF_1Lyug" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         <AuthProvider>{children}</AuthProvider>
       </body>

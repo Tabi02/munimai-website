@@ -4,7 +4,7 @@ import type { CountryInfo } from "../lib/geo";
 import { priceForCountry } from "../lib/geo";
 
 /* Pure-CSS macOS window showing the MunimAI OS desktop app.
- * Looks like a real product screenshot — no AI-generated decoration. */
+ * Looks like a real product screenshot, no AI-generated decoration. */
 
 function Icon({ d }: { d: string }) {
   return (
@@ -35,7 +35,7 @@ export function AppWindow({ country }: { country: CountryInfo }) {
     <div className="appwin" aria-hidden="true">
       <div className="appwin-bar">
         <div className="traffic"><i /><i /><i /></div>
-        <div className="appwin-title">MunimAI OS — Dashboard</div>
+        <div className="appwin-title">MunimAI OS · Dashboard</div>
         <div style={{ width: 52 }} />
       </div>
       <div className="appwin-body">
@@ -86,7 +86,7 @@ export function AppWindow({ country }: { country: CountryInfo }) {
             ))}
           </div>
           <div className="appwin-ai">
-            <div className="appwin-ai-mark">✦</div>
+            <div className="appwin-ai-mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"/></svg></div>
             <div>
               <p><strong>AI Assistant:</strong> 3 invoices are overdue totalling {priceForCountry(1297000, country)}. Want me to draft polite reminders?</p>
               <span className="mini-btn">Draft reminders</span>

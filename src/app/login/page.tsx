@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth, DEMO_EMAIL, DEMO_PASSWORD } from "../../lib/auth";
 import { ApiError } from "../../lib/api";
-import { Button, Card, Field, BrandLoader } from "../../components/ui";
+import { Button, Field } from "../../components/ui";
+import { Wordmark } from "../../components/site";
 
 export default function LoginPage() {
   const { login, loading } = useAuth();
@@ -35,50 +36,42 @@ export default function LoginPage() {
     setError("");
   };
 
-  if (loading) return <BrandLoader label="Preparing sign in…" />;
+  if (loading) return <div className="container" style={{ padding: "80px 0" }}><p className="faint">Preparing sign in…</p></div>;
 
   return (
     <div className="auth-wrap">
-      <div className="hero-glow" />
-      <Card className="auth-card">
-        <Link href="/" className="brand" style={{ marginBottom: 26, display: "inline-flex" }}>
-          <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" style={{ width: 30, height: 30 }} /> MunimAI OS
+      <div className="auth-side">
+        <Link href="/" aria-label="MunimAI OS home" style={{ display: "inline-block", marginBottom: 32 }}>
+          <Wordmark />
         </Link>
-        <h1>Welcome back</h1>
-        <p className="muted" style={{ marginBottom: 26 }}>Sign in to manage your subscription, licenses, and devices.</p>
-        {error && <div className="form-error">{error}</div>}
-        <form onSubmit={submit}>
-          <Field label="Email">
-            <input className="input" type="email" required placeholder="you@company.com"
-              value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
-          </Field>
-          <Field label="Password">
-            <input className="input" type="password" required placeholder="••••••••••"
-              value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
-          </Field>
-          <Button type="submit" disabled={busy} >
-            <span style={{ width: "100%" }}>{busy ? "Signing in…" : "Sign in"}</span>
-          </Button>
-        </form>
-        <div className="divider" />
-        <div className="demo-box">
-          <div className="demo-box-h">Just exploring? Try the demo account</div>
-          <div className="demo-creds">
-            <code>{DEMO_EMAIL}</code>
-            <code>{DEMO_PASSWORD}</code>
-          </div>
-          <button type="button" className="btn btn-ghost btn-sm" onClick={fillDemo}>
-            Fill demo credentials
-          </button>
-          <p className="muted" style={{ fontSize: 12, margin: "10px 0 0" }}>
-            Demo mode runs fully in your browser with sample data — no signup needed.
+        <h1>Welcome back.</h1>
+        <p>Sign in to manage your subscription, licenses and devices.</p>
+        <ul className="auth-points">
+          <li><strong>One account, every device</strong>Your license follows your account across your machines.</li>
+          <li><strong>Billing and invoices</strong>View plans, receipts and renewal dates.</li>
+          <li><strong>Device management</strong>See licensed devices and deactivate a lost one.</li>
+        </ul>
+      </div>
+      <div className="auth-form-col">
+        <div className="auth-card">
+          <h2>Sign in</h2>
+          <p className="faint" style={{ marginBottom: 24 }}>Use your MunimAI OS account.</p>
+          {error && <div className="auth-error" role="alert">{error}</div>}
+          <form onSubmit={submit}>
+            <Field label="Email">
+              <input className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+            </Field>
+            <Field label="Password">
+              <input className="input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" />
+            </Field>
+            <Button type="submit" block disabled={busy}>{busy ? "Signing in…" : "Sign in"}</Button>
+          </form>
+          <p className="small faint" style={{ marginTop: 16 }}>
+            Exploring? <button type="button" className="link-btn" onClick={fillDemo}>Fill the demo account</button> ({DEMO_EMAIL}).
           </p>
+          <p className="auth-alt">New to MunimAI OS? <Link href="/register">Create an account</Link></p>
         </div>
-        <div className="divider" />
-        <p className="muted" style={{ textAlign: "center", margin: 0 }}>
-          New here? <Link href="/register" style={{ color: "var(--accent-2)", fontWeight: 600 }}>Create an account</Link>
-        </p>
-      </Card>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,8 @@
  * Detection is timezone-based (no external IP service needed); the user can
  * always override via the pickers, which persist to localStorage. */
 
-import type { Lang } from "./i18n";
+/** Supported site languages. */
+export type Lang = "en" | "hi" | "es" | "pt" | "fr" | "de";
 
 export interface CountryInfo {
   code: string;      // ISO-2
@@ -155,14 +156,14 @@ const CUSTOM_PRICES: Record<string, Record<string, number>> = {
     KRW: 16000, CNY: 85, ZAR: 220, NGN: 18000, KES: 1550, BRL: 60,
     MXN: 200, QAR: 45, KWD: 4, OMR: 5, BHD: 5, NZD: 20,
   },
-  pro: {
+  business: {
     INR: 2490, USD: 29, EUR: 27, GBP: 24, AED: 110, SAR: 110, SGD: 39,
     AUD: 45, CAD: 40, PKR: 8400, BDT: 3600, NPR: 4000, LKR: 9000,
     MYR: 130, IDR: 480000, PHP: 1700, THB: 1050, VND: 750000, JPY: 4500,
     KRW: 40000, CNY: 210, ZAR: 550, NGN: 45000, KES: 3900, BRL: 150,
     MXN: 500, QAR: 110, KWD: 9, OMR: 11, BHD: 11, NZD: 50,
   },
-  team: {
+  scale: {
     INR: 4990, USD: 59, EUR: 55, GBP: 49, AED: 220, SAR: 220, SGD: 79,
     AUD: 89, CAD: 80, PKR: 16900, BDT: 7200, NPR: 8000, LKR: 18000,
     MYR: 260, IDR: 950000, PHP: 3400, THB: 2100, VND: 1500000, JPY: 9000,
@@ -171,9 +172,18 @@ const CUSTOM_PRICES: Record<string, Record<string, number>> = {
   },
 };
 
+/* Legacy slugs still used by the dashboard demo data and the plans API. */
+CUSTOM_PRICES.pro = CUSTOM_PRICES.business;
+CUSTOM_PRICES.team = CUSTOM_PRICES.scale;
+
+/** Numeric custom price (major units), or undefined when falling back to conversion. */
+export function customPriceFor(planSlug: string, currency: string): number | undefined {
+  return CUSTOM_PRICES[planSlug]?.[currency];
+}
+
 /** True when a plan has a business-set price for this currency. */
 export function hasCustomPrice(planSlug: string, currency: string): boolean {
-  return CUSTOM_PRICES[planSlug]?.[currency] !== undefined;
+  return customPriceFor(planSlug, currency) !== undefined;
 }
 
 /** Plan price for a country: custom business price first, converted fallback. */

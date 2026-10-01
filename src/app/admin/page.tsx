@@ -3,13 +3,20 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../lib/auth";
 import { api, formatINR } from "../../lib/api";
-import { Card, Spinner, StatusBadge } from "../../components/ui";
+import { Badge, PageSkeleton } from "../../components/ui";
 
 interface Overview {
   organizations: number;
   users: number;
   subscriptionsByStatus: Record<string, number>;
   mrrCents: number;
+}
+
+function statusTone(status: string): "green" | "amber" | "red" | "gray" {
+  if (status === "active") return "green";
+  if (status === "trialing" || status === "past_due") return "amber";
+  if (status === "canceled" || status === "unpaid") return "red";
+  return "gray";
 }
 
 export default function AdminOverview() {
@@ -21,7 +28,7 @@ export default function AdminOverview() {
     api.get<Overview>("/v1/admin/overview", accessToken).then(setData).catch(() => {});
   }, [accessToken]);
 
-  if (!data) return <Spinner />;
+  if (!data) return <PageSkeleton />;
 
   const entries = Object.entries(data.subscriptionsByStatus);
 
@@ -30,37 +37,25 @@ export default function AdminOverview() {
       <h1 style={{ fontSize: 30, marginBottom: 4 }}>Platform overview</h1>
       <p className="muted">The commercial health of MunimAI OS at a glance.</p>
 
-      <div className="stat-grid">
-        <div className="stat">
-          <div className="stat-k">Organizations</div>
-          <div className="stat-v">{data.organizations}</div>
-        </div>
-        <div className="stat">
-          <div className="stat-k">Users</div>
-          <div className="stat-v">{data.users}</div>
-        </div>
-        <div className="stat">
-          <div className="stat-k">MRR</div>
-          <div className="stat-v">{formatINR(data.mrrCents)}</div>
-        </div>
-        <div className="stat">
-          <div className="stat-k">Paying subs</div>
-          <div className="stat-v">{(data.subscriptionsByStatus.active || 0) + (data.subscriptionsByStatus.past_due || 0)}</div>
-        </div>
+      <div className="stat-strip" style={{ marginTop: 24 }}>
+        <div className="stat"><span className="stat-k">Organizations</span><span className="stat-v">{data.organizations}</span></div>
+        <div className="stat"><span className="stat-k">Users</span><span className="stat-v">{data.users}</span></div>
+        <div className="stat"><span className="stat-k">MRR</span><span className="stat-v">{formatINR(data.mrrCents)}</span></div>
+        <div className="stat"><span className="stat-k">Paying subs</span><span className="stat-v">{(data.subscriptionsByStatus.active || 0) + (data.subscriptionsByStatus.past_due || 0)}</span></div>
       </div>
 
-      <Card>
-        <div className="card-title">Subscriptions by status</div>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 16 }}>
-          {entries.length === 0 && <p className="muted" style={{ margin: 0 }}>No subscriptions yet.</p>}
+      <section style={{ border: "1px solid var(--line)", borderRadius: "var(--radius-s)", background: "var(--surface)", padding: 20, marginTop: 24 }}>
+        <h2 style={{ fontSize: 18, marginBottom: 16 }}>Subscriptions by status</h2>
+        {entries.length === 0 && <p className="muted" style={{ margin: 0 }}>No subscriptions yet.</p>}
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
           {entries.map(([status, count]) => (
-            <div key={status} className="stat" style={{ minWidth: 150 }}>
-              <div className="stat-k">{count}</div>
-              <StatusBadge status={status} />
+            <div key={status} style={{ border: "1px solid var(--line)", borderRadius: "var(--radius-s)", padding: "12px 16px", minWidth: 150 }}>
+              <div className="stat-v">{count}</div>
+              <div style={{ marginTop: 6 }}><Badge tone={statusTone(status)}>{status}</Badge></div>
             </div>
           ))}
         </div>
-      </Card>
+      </section>
     </>
   );
 }

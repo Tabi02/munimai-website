@@ -6,10 +6,10 @@ import { useEffect } from "react";
 import { useAuth } from "../../lib/auth";
 
 const LINKS = [
-  { href: "/admin", label: "Overview", icon: "▦" },
-  { href: "/admin/organizations", label: "Organizations", icon: "🏢" },
-  { href: "/admin/subscriptions", label: "Subscriptions", icon: "💳" },
-  { href: "/admin/events", label: "Events", icon: "📋" },
+  { href: "/admin", label: "Overview" },
+  { href: "/admin/organizations", label: "Organizations" },
+  { href: "/admin/subscriptions", label: "Subscriptions" },
+  { href: "/admin/events", label: "Events" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -43,7 +43,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {LINKS.map((l) => (
           <Link key={l.href} href={l.href}
             className={`side-link${pathname === l.href ? " active" : ""}`}>
-            <span style={{ width: 22, textAlign: "center" }}>{l.icon}</span>
             {l.label}
           </Link>
         ))}

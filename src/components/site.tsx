@@ -1,105 +1,137 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useAuth } from "../lib/auth";
-import { STRINGS, LANGS, type Lang } from "../lib/i18n";
-import { Button, ThemeToggle } from "./ui";
+import { Button } from "./ui";
+import { IconMenu, IconX } from "./icons";
 
-export function LangToggle({ lang, onChange }: { lang: Lang; onChange: (l: Lang) => void }) {
+const NAV_LINKS = [
+  { href: "/features", label: "Product" },
+  { href: "/features#ai-workspace", label: "AI" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/download", label: "Download" },
+  { href: "/security", label: "Security" },
+];
+
+export function Wordmark({ compact = false }: { compact?: boolean }) {
   return (
-    <select
-      className="lang-select"
-      value={lang}
-      onChange={(e) => onChange(e.target.value as Lang)}
-      aria-label="Language"
-    >
-      {LANGS.map((l) => (
-        <option key={l.code} value={l.code}>
-          {l.label}
-        </option>
-      ))}
-    </select>
+    <Link href="/" className="brand" aria-label="MunimAI OS home">
+      <img src="/logo.png" alt="" className="brand-logo" />
+      <span>Munim<span className="brand-ai">AI</span>&nbsp;OS</span>
+    </Link>
   );
 }
 
-export function SiteNav({ lang = "en", onLangChange }: { lang?: Lang; onLangChange?: (l: Lang) => void }) {
+export function SiteNav() {
   const { user, loading } = useAuth();
-  const t = STRINGS[lang].nav;
+  const [open, setOpen] = useState(false);
   return (
     <header className="nav">
       <div className="container nav-inner">
-        <Link href="/" className="brand">
-          <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" />
-          Munim<span className="brand-ai">AI</span>&nbsp;OS
-        </Link>
-        <nav className="nav-links">
-          <a href="/#features" className="nav-link hide-m">{t.features}</a>
-          <a href="/#pricing" className="nav-link hide-m">{t.pricing}</a>
-          <a href="/demo" className="nav-link hide-m">{t.demo}</a>
-          <a href="/#faq" className="nav-link hide-m">{t.faq}</a>
-          {onLangChange && <LangToggle lang={lang} onChange={onLangChange} />}
-          <ThemeToggle />
-          {!loading && (user ? (
-            <Button href="/dashboard" size="sm">{t.dashboard} →</Button>
-          ) : (
-            <>
-              <a href="/login" className="nav-link hide-m">{t.signin}</a>
-              <Button href="/register" size="sm">{t.getstarted}</Button>
-            </>
+        <Wordmark />
+        <nav className="nav-links" aria-label="Primary">
+          {NAV_LINKS.map((l) => (
+            <Link key={l.href + l.label} href={l.href} className="nav-link hide-m">{l.label}</Link>
           ))}
         </nav>
+        <div className="nav-cta">
+          {!loading && (user ? (
+            <Button href="/dashboard" size="sm">Dashboard</Button>
+          ) : (
+            <>
+              <Link href="/login" className="nav-link hide-m">Sign in</Link>
+              <Button href="/register" size="sm">Get started</Button>
+            </>
+          ))}
+          <button
+            className="nav-toggle"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            {open ? <IconX size={20} /> : <IconMenu size={20} />}
+          </button>
+        </div>
       </div>
+      <nav className={`nav-mobile${open ? " open" : ""}`} aria-label="Mobile">
+        {NAV_LINKS.map((l) => (
+          <Link key={l.href + l.label} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>
+        ))}
+        <Link href="/login" onClick={() => setOpen(false)}>Sign in</Link>
+        <Link href="/register" onClick={() => setOpen(false)}>Get started</Link>
+      </nav>
     </header>
   );
 }
 
-export function SiteFooter({ lang = "en" }: { lang?: Lang }) {
-  const t = STRINGS[lang];
+const FOOTER_COLS: Array<{ head: string; links: Array<{ href: string; label: string }> }> = [
+  {
+    head: "Product",
+    links: [
+      { href: "/features", label: "Features" },
+      { href: "/features#ai-workspace", label: "AI workspace" },
+      { href: "/features#automation", label: "Automation" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/download", label: "Download" },
+    ],
+  },
+  {
+    head: "Resources",
+    links: [
+      { href: "/demo", label: "Live demo" },
+      { href: "/support", label: "Support" },
+      { href: "/status", label: "System status" },
+      { href: "/security", label: "Security" },
+    ],
+  },
+  {
+    head: "Company",
+    links: [
+      { href: "/support", label: "Contact" },
+      { href: "/security", label: "Security" },
+      { href: "/status", label: "Status" },
+    ],
+  },
+  {
+    head: "Legal",
+    links: [
+      { href: "/terms", label: "Terms of Service" },
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/refund-policy", label: "Refund Policy" },
+      { href: "/license", label: "License Agreement" },
+      { href: "/cookie-policy", label: "Cookie Policy" },
+    ],
+  },
+];
+
+export function SiteFooter() {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div>
-            <Link href="/" className="brand" style={{ marginBottom: 14, display: "inline-flex" }}>
-              <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" />
-              Munim<span className="brand-ai">AI</span>&nbsp;OS
-            </Link>
+            <Wordmark />
             <p className="footer-tag">
-              {t.footerTag}
+              A business operating system for customers, sales, inventory, finance and AI-assisted work. Local-first, honestly licensed.
             </p>
           </div>
-          <div>
-            <h5>{t.footerCols.product}</h5>
-            <a href="/#features">{t.footerLinks.features}</a>
-            <a href="/#pricing">{t.footerLinks.pricing}</a>
-            <a href="/#faq">{t.footerLinks.faq}</a>
-          </div>
-          <div>
-            <h5>{t.footerCols.account}</h5>
-            <a href="/login">{t.footerLinks.signin}</a>
-            <a href="/register">{t.footerLinks.getstarted}</a>
-            <a href="/dashboard">{t.footerLinks.dashboard}</a>
-          </div>
-          <div>
-            <h5>{t.footerCols.help}</h5>
-            <a href="/support">{t.footerLinks.support}</a>
-            <a href="/status">{t.footerLinks.status}</a>
-          </div>
-          <div>
-            <h5>{t.footerCols.legal}</h5>
-            <a href="/terms">{t.footerLinks.terms}</a>
-            <a href="/privacy">{t.footerLinks.privacy}</a>
-            <a href="/refund-policy">{t.footerLinks.refund}</a>
-          </div>
+          {FOOTER_COLS.map((col) => (
+            <div className="footer-col" key={col.head}>
+              <h5>{col.head}</h5>
+              {col.links.map((l) => (
+                <Link key={l.href + l.label} href={l.href}>{l.label}</Link>
+              ))}
+            </div>
+          ))}
         </div>
-        <div className="footer-legal">
-          <span>{t.footerRights}</span>
-          <span className="links">
-            <a href="/terms">{t.footerLinks.terms}</a><span className="sep">|</span>
-            <a href="/privacy">{t.footerLinks.privacy}</a><span className="sep">|</span>
-            <a href="/refund-policy">{t.footerLinks.refund}</a>
+        <div className="footer-base">
+          <span>© 2026 MunimAI OS. All rights reserved.</span>
+          <span className="right">
+            <Link href="/terms">Terms</Link><span className="sep">·</span>
+            <Link href="/privacy">Privacy</Link><span className="sep">·</span>
+            <Link href="/cookie-policy">Cookies</Link>
           </span>
-          <span>{t.footerBottom}</span>
         </div>
       </div>
     </footer>

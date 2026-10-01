@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../lib/auth";
 import { api, type Device } from "../../../lib/api";
-import { Button, Card, Spinner } from "../../../components/ui";
+import { Button, Badge, PageSkeleton, EmptyState, DataTable } from "../../../components/ui";
 
 export default function DevicesPage() {
   const { accessToken } = useAuth();
@@ -28,55 +28,54 @@ export default function DevicesPage() {
     setBusy(null);
   };
 
-  if (!devices) return <Spinner />;
+  if (!devices) return <PageSkeleton />;
 
   const active = devices.filter((d) => !d.revoked_at);
 
   return (
     <>
-      <h1 style={{ fontSize: 30, marginBottom: 4 }}>Devices</h1>
-      <p className="muted">
-        Each activated desktop counts as one device. Revoke one to free its seat — the app on that
-        machine stops working at the next check-in.
-      </p>
-
-      <Card className="mt">
-        {devices.length === 0 ? (
-          <p className="muted" style={{ margin: 0 }}>
-            No devices yet. Install the desktop app and activate it with your license key from the Overview page.
+      <div className="page-head">
+        <div>
+          <p className="dash-crumb">Account</p>
+          <h1>Devices</h1>
+          <p className="faint">
+            Each activated desktop counts as one device. Revoke one to free its seat. The app on that
+            machine stops working at the next check-in.
           </p>
-        ) : (
-          <table className="table">
-            <thead>
-              <tr><th>Device</th><th>OS</th><th>App</th><th>Last seen</th><th>Status</th><th></th></tr>
-            </thead>
-            <tbody>
-              {devices.map((d) => (
-                <tr key={d.id}>
-                  <td><strong>{d.device_name}</strong><br /><span className="muted" style={{ fontSize: 12 }}>{d.device_uid.slice(0, 18)}…</span></td>
-                  <td>{d.os}</td>
-                  <td className="muted">{d.app_version}</td>
-                  <td className="muted">{new Date(d.last_seen_at).toLocaleString("en-IN")}</td>
-                  <td>
-                    {d.revoked_at
-                      ? <span className="badge badge-red"><span className="dot" />Revoked</span>
-                      : <span className="badge badge-green"><span className="dot" />Active</span>}
-                  </td>
-                  <td style={{ textAlign: "right" }}>
-                    {!d.revoked_at && (
-                      <Button variant="danger-ghost" size="sm" disabled={busy === d.id}
-                        onClick={() => revoke(d.id, d.device_name)}>
-                        {busy === d.id ? "Revoking…" : "Revoke"}
-                      </Button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </Card>
-      <p className="muted mt">{active.length} active device{active.length === 1 ? "" : "s"}</p>
+        </div>
+      </div>
+
+      {devices.length === 0 ? (
+        <EmptyState
+          title="No devices yet."
+          body="Install the desktop app and activate it with your license key from the Overview page."
+          actions={<Button href="/download" variant="secondary">Get the desktop app</Button>}
+        />
+      ) : (
+        <DataTable
+          caption={`${active.length} active device${active.length === 1 ? "" : "s"}`}
+          columns={[
+            { key: "device", header: "Device" },
+            { key: "os", header: "OS" },
+            { key: "app", header: "App", mono: true },
+            { key: "seen", header: "Last seen" },
+            { key: "status", header: "Status" },
+            { key: "action", header: "", align: "right" },
+          ]}
+          rows={devices.map((d) => ({
+            device: <span><span className="t-strong">{d.device_name}</span><br /><span className="small faint mono">{d.device_uid.slice(0, 18)}…</span></span>,
+            os: d.os,
+            app: d.app_version,
+            seen: new Date(d.last_seen_at).toLocaleString("en-IN"),
+            status: d.revoked_at ? <Badge tone="red">Revoked</Badge> : <Badge tone="green">Active</Badge>,
+            action: !d.revoked_at ? (
+              <Button variant="danger" size="sm" disabled={busy === d.id} onClick={() => revoke(d.id, d.device_name)}>
+                {busy === d.id ? "Revoking…" : "Revoke"}
+              </Button>
+            ) : null,
+          }))}
+        />
+      )}
     </>
   );
 }

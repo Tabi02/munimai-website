@@ -112,7 +112,7 @@ export function formatINR(cents: number): string {
 export function statusBadge(status: string): string {
   switch (status) {
     case "active": return "badge-green";
-    case "trialing": return "badge-violet";
+    case "trialing": return "badge-amber";
     case "past_due":
     case "grace_period": return "badge-amber";
     case "expired":

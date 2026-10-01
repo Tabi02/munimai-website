@@ -1,18 +1,42 @@
+import Link from "next/link";
 import { SiteNav, SiteFooter } from "./site";
+import { Reveal } from "./ui";
+
+const DOCS = [
+  { href: "/terms", label: "Terms of Service" },
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/refund-policy", label: "Refund Policy" },
+  { href: "/license", label: "License Agreement" },
+  { href: "/cookie-policy", label: "Cookie Policy" },
+];
 
 export function LegalPage({ title, updated, children }: { title: string; updated: string; children: React.ReactNode }) {
   return (
     <>
       <SiteNav />
-      <main className="container" style={{ maxWidth: 820, paddingTop: 48, paddingBottom: 64 }}>
-        <h1 style={{ fontSize: 36, marginBottom: 8 }}>{title}</h1>
-        <p style={{ color: "var(--muted)", marginBottom: 32 }}>Last updated: {updated}</p>
-        <div className="legal-body">{children}</div>
-        <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 40, borderTop: "1px solid var(--border)", paddingTop: 20 }}>
-          These documents are provided as standard starting terms for MunimAI OS. They should be reviewed by a
-          qualified legal professional in your jurisdiction before commercial launch.
-        </p>
-      </main>
+      <div className="container" style={{ paddingTop: 56, paddingBottom: 72 }}>
+        <Reveal>
+          <p className="legal-meta">{title} · Last updated {updated}</p>
+          <h1 style={{ fontSize: "clamp(30px, 3.6vw, 44px)", marginBottom: 40 }}>{title}</h1>
+        </Reveal>
+        <div className="legal-wrap">
+          <nav className="legal-toc hide-m" aria-label="Legal documents">
+            {DOCS.map((d) => (
+              <Link key={d.href} href={d.href} aria-current={d.label === title ? "page" : undefined}
+                style={d.label === title ? { color: "var(--ink)", background: "var(--surface-2)", fontWeight: 600 } : undefined}>
+                {d.label}
+              </Link>
+            ))}
+          </nav>
+          <article className="legal-doc">
+            {children}
+            <p className="small faint" style={{ marginTop: 48, borderTop: "1px solid var(--line)", paddingTop: 20 }}>
+              These documents are standard starting terms for MunimAI OS. Have them reviewed by a
+              qualified legal professional in your jurisdiction before relying on them commercially.
+            </p>
+          </article>
+        </div>
+      </div>
       <SiteFooter />
     </>
   );

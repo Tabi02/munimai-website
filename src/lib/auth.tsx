@@ -24,7 +24,7 @@ const AuthContext = createContext<AuthState | null>(null);
 const REFRESH_KEY = "bizai_refresh";
 const DEMO_KEY = "munimai_demo";
 
-/** Built-in demo account — works fully client-side so the static site can be explored. */
+/** Built-in demo account. Works fully client-side so the static site can be explored. */
 export const DEMO_EMAIL = "demo@munimai.com";
 export const DEMO_PASSWORD = "demo1234";
 
