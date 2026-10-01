@@ -11,4 +11,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://munim-ai.is-great.net/sitemap.xml
+Sitemap: https://munimai-website.vercel.app/sitemap.xml
