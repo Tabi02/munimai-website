@@ -10,6 +10,101 @@ import {
   storedCountryCode, type CountryInfo,
 } from "../lib/geo";
 
+/* ---------- differentiator icons: hand-drawn stroke SVGs ---------- */
+function DiffIcon({ name }: { name: string }) {
+  const paths: Record<string, React.ReactNode> = {
+    local: (
+      <>
+        <rect x="3" y="4" width="18" height="12" rx="2" />
+        <path d="M9.5 10.2l1.8 1.8 3.4-3.8" />
+        <path d="M9 20h6M12 16v4" />
+      </>
+    ),
+    agents: (
+      <>
+        <path d="M10 3l1.6 4.9L16.5 9.5l-4.9 1.6L10 16l-1.6-4.9L3.5 9.5l4.9-1.6z" />
+        <circle cx="17.5" cy="17.5" r="3.5" />
+        <path d="M16 17.5l1.1 1.1 2-2.2" />
+      </>
+    ),
+    import: (
+      <>
+        <path d="M12 3v11" />
+        <path d="M7.5 10.5L12 15l4.5-4.5" />
+        <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+      </>
+    ),
+    globe: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18" />
+        <path d="M12 3c2.8 2.7 4 5.8 4 9s-1.2 6.3-4 9c-2.8-2.7-4-5.8-4-9s1.2-6.3 4-9z" />
+      </>
+    ),
+    devices: (
+      <>
+        <rect x="2" y="5" width="13" height="9" rx="1.5" />
+        <path d="M2 17.5h13" />
+        <rect x="17" y="8.5" width="5" height="10" rx="1.2" />
+        <path d="M19.5 16.5h.01" />
+      </>
+    ),
+    code: (
+      <>
+        <path d="M8.5 8L4 12l4.5 4" />
+        <path d="M15.5 8l4.5 4-4.5 4" />
+        <path d="M13.5 5l-3 14" />
+      </>
+    ),
+  };
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true">
+      {paths[name]}
+    </svg>
+  );
+}
+
+const DIFFS: Array<{ icon: string; name: string; desc: React.ReactNode; meta: string }> = [
+  {
+    icon: "local",
+    name: "Local-first, always",
+    desc: "Your database lives on your machine in a plain SQLite file. The app works fully offline, and no subscription can lock you out of your own records.",
+    meta: "SQLite · Offline",
+  },
+  {
+    icon: "agents",
+    name: "AI that asks before it acts",
+    desc: "Fourteen specialist agents read your customers, stock and accounts, then draft the next step. Nothing is sent, recorded or changed, and no money or stock moves, without your explicit approval. Every action is audit-logged.",
+    meta: "14 agents · Approval-gated",
+  },
+  {
+    icon: "import",
+    name: "Import in an afternoon",
+    desc: "Bring your customers and products with one-click CSV import and ready-made templates. No retyping years of records to get started.",
+    meta: "CSV · Templates",
+  },
+  {
+    icon: "globe",
+    name: "Built for wherever you sell",
+    desc: "Six interface languages and tax and currency presets for 25 countries. Configure GST, VAT or sales tax per country, per business.",
+    meta: "6 languages · 25 countries",
+  },
+  {
+    icon: "devices",
+    name: "Devices you control",
+    desc: "Each plan includes a set number of devices. The owner sees every connected device and decides who gets access, device by device.",
+    meta: "Owner-managed",
+  },
+  {
+    icon: "code",
+    name: "Open source, honestly",
+    desc: <>The full desktop app is published under AGPL-3.0. Read the code, audit it, run it your way: <a href="https://github.com/Tabi02/aetros-biz">github.com/Tabi02/aetros-biz</a>.</>,
+    meta: "AGPL-3.0",
+  },
+];
+
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
@@ -28,7 +123,7 @@ const MODULES = [
   { name: "Sales", desc: "Quotations, orders, invoices and payment links. Every sale traces back to its customer and its stock.", meta: "Orders · Invoices" },
   { name: "Inventory", desc: "Stock levels, reorder points and purchase flow, kept in step with every sale you make.", meta: "Stock · Purchase" },
   { name: "Finance", desc: "Expenses, profit and loss, and tax-aware reporting built for how small businesses actually file.", meta: "P&L · Tax" },
-  { name: "AI Workspace", desc: "Ask questions about your business in plain language. AI analyses, recommends, and waits for approval.", meta: "7 specialists" },
+  { name: "AI Workspace", desc: "Ask questions about your business in plain language. AI analyses, recommends, and waits for approval.", meta: "14 specialists" },
   { name: "Automation", desc: "Overdue reminders, low-stock alerts and follow-ups that run themselves, with you in control.", meta: "Workflows" },
 ];
 
@@ -189,7 +284,7 @@ export default function LandingPage() {
                 <span className="eyebrow">AI workspace</span>
                 <h2>AI that works inside your business.</h2>
                 <p>
-                  Seven specialist assistants read your actual customers, stock and
+                  Fourteen specialist assistants read your actual customers, stock and
                   accounts, then recommend the next step. Every recommendation waits
                   for your approval before anything happens.
                 </p>
@@ -231,6 +326,31 @@ export default function LandingPage() {
               </dl>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* ---------- differentiators ---------- */}
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <SectionHead
+              eyebrow="Why Aetros Biz"
+              title="Different by design."
+              lede="Six decisions that set Aetros Biz apart from typical cloud software. Each one keeps the business, not the vendor, in control."
+            />
+          </Reveal>
+          <Reveal>
+            <div className="diff-list">
+              {DIFFS.map((d) => (
+                <div className="diff-row" key={d.name}>
+                  <span className="diff-icon" aria-hidden="true"><DiffIcon name={d.icon} /></span>
+                  <h3 className="diff-name">{d.name}</h3>
+                  <p className="diff-desc">{d.desc}</p>
+                  <span className="diff-meta">{d.meta}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

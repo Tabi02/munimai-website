@@ -34,7 +34,7 @@ export default function DownloadPage() {
             <div>
               <div className="mod-row" style={{ cursor: "default" }}>
                 <span className="mod-name">Windows <Badge tone="green">Available</Badge></span>
-                <p className="mod-desc">Windows 10 or later, 64-bit. Portable ZIP, about 220 MB. No admin rights needed.</p>
+                <p className="mod-desc">Windows 10 or later, 64-bit. Portable ZIP, about 220 MB: extract and run, no installer and no admin rights needed.</p>
                 <span className="mod-meta">
                   {WIN_URL ? (
                     <Button href={WIN_URL} size="sm">Download for Windows</Button>
