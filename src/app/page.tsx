@@ -120,11 +120,15 @@ export default function LandingPage() {
       <SiteNav lang={lang} onLangChange={changeLang} />
 
       <section className="hero">
+        <div className="grid-bg" aria-hidden="true" />
+        <div className="orb orb-a" aria-hidden="true" />
+        <div className="orb orb-b" aria-hidden="true" />
         <div className="container">
+          <div className="hero-badge"><span className="pulse-dot" />MunimAI OS</div>
           <h1>
             {t.heroH1a}
             <br />
-            {t.heroH1b}
+            <span className="grad-text">{t.heroH1b}</span>
           </h1>
           <p className="lead">{t.heroLead}</p>
           <div className="hero-cta">
@@ -132,6 +136,17 @@ export default function LandingPage() {
             <a href="/#pricing" className="link-more">{t.heroCta2} &gt;</a>
           </div>
           <p className="hero-note">{t.heroNote}</p>
+          <div className="cmd-bar" aria-hidden="true">
+            <div className="cmd-row">
+              <span className="cmd-spark">✨</span>
+              <span className="cmd-text">Which invoices are overdue?</span>
+              <span className="cmd-caret" />
+            </div>
+            <div className="cmd-answer">
+              <span className="ai-mark">AI</span>
+              <span><strong>3 invoices</strong> overdue — total <strong>{priceForCountry(1297000, country)}</strong>. Royal Sweets is 12 days late. Draft a reminder?</span>
+            </div>
+          </div>
           <Reveal>
             <div className="trust-row" aria-label="Trust highlights">
               {t.trustBadges.map((b) => (
@@ -139,7 +154,9 @@ export default function LandingPage() {
               ))}
             </div>
           </Reveal>
-          <AppWindow country={country} />
+          <div className="hero-shot">
+            <AppWindow country={country} />
+          </div>
         </div>
       </section>
 
@@ -149,18 +166,20 @@ export default function LandingPage() {
             <h2 className="section-h">{t.featuresH}</h2>
             <p className="section-p" style={{ margin: "0 auto" }}>{t.featuresP}</p>
           </div>
-          {rows.map((r, i) => (
-            <Reveal key={r.e} delay={(i % 3) * 90}>
-              <div className={`frow${i % 2 === 1 ? " flip" : ""}`}>
-                <div className="frow-text">
-                  <div className="eyebrow">{r.e}</div>
-                  <h3>{r.h}</h3>
-                  <p>{r.p}</p>
+          <div className="bento-grid">
+            {rows.map((r, i) => (
+              <Reveal key={r.e} delay={(i % 3) * 90} className="reveal-card">
+                <div className="bento-card">
+                  <div className="bento-visual">{r.visual}</div>
+                  <div>
+                    <div className="eyebrow">{r.e}</div>
+                    <h3>{r.h}</h3>
+                    <p>{r.p}</p>
+                  </div>
                 </div>
-                <div className="frow-visual">{r.visual}</div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -218,13 +237,15 @@ export default function LandingPage() {
       </section>
 
       <section className="cta-band">
-        <Reveal>
-          <div className="container">
-            <h2>{t.ctaH}</h2>
-            <p>{t.ctaP}</p>
-            <Button href="/register">{t.ctaBtn}</Button>
-          </div>
-        </Reveal>
+        <div className="container">
+          <Reveal>
+            <div className="cta-panel">
+              <h2>{t.ctaH}</h2>
+              <p>{t.ctaP}</p>
+              <Button href="/register">{t.ctaBtn}</Button>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       <SiteFooter lang={lang} />

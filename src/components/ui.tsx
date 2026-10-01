@@ -37,9 +37,9 @@ export function Field({ label, children, error }: {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   useEffect(() => {
-    const saved = localStorage.getItem("bizai_theme") || "light";
+    const saved = localStorage.getItem("bizai_theme") || "dark";
     setTheme(saved);
     document.documentElement.setAttribute("data-theme", saved);
   }, []);
