@@ -188,3 +188,20 @@ export function Reveal({ children, className = "", delay = 0 }: {
     </div>
   );
 }
+
+/* ---------- Splash intro: animated logo on site open ---------- */
+export function SplashIntro() {
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setDone(true), 1800);
+    return () => clearTimeout(t);
+  }, []);
+  if (done) return null;
+  return (
+    <div className={`splash-intro${done ? " splash-out" : ""}`} aria-hidden>
+      <div className="splash-logo">A</div>
+      <div className="splash-name">Aetros <span>Biz</span></div>
+      <div className="splash-bar"><i /></div>
+    </div>
+  );
+}

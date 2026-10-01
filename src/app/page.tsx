@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { SiteNav, SiteFooter } from "../components/site";
 import { ProductDemo } from "../components/demo";
-import { Button, SectionHead, Reveal, DataTable, Badge } from "../components/ui";
+import { Button, SectionHead, Reveal, DataTable, Badge, SplashIntro } from "../components/ui";
 import { PricingTable, pricingNote, useCountry } from "../components/pricing";
 import {
   COUNTRIES, countryByCode, detectCountryCode, priceForCountry,
@@ -160,6 +160,7 @@ export default function LandingPage() {
 
   return (
     <>
+      <SplashIntro />
       <SiteNav />
 
       {/* ---------- hero ---------- */}
