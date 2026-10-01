@@ -88,7 +88,7 @@ export default function DemoPage() {
       <main className="section" style={{ paddingTop: 64 }}>
         <div className="container" style={{ maxWidth: 860 }}>
           <p style={{ color: "var(--accent)", fontWeight: 700, fontSize: 13, letterSpacing: 2, textTransform: "uppercase" }}>Interactive demo</p>
-          <h1 style={{ fontSize: 40, marginBottom: 8 }}>Dekho — MunimAI kaise kaam karta hai</h1>
+          <h1 style={{ fontSize: 40, marginBottom: 8 }}>Dekho — MunimAI OS kaise kaam karta hai</h1>
           <p className="card-sub" style={{ fontSize: 16, marginBottom: 32 }}>
             Apni zaroorat chuno, apni problem batao — aur dekho AI kaise use samajhkar workspace banata hai.
             <strong> Ye demo sample data ke saath hai</strong>; real app me yahan aapka asli data hota hai.

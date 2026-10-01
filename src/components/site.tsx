@@ -29,8 +29,8 @@ export function SiteNav({ lang = "en", onLangChange }: { lang?: Lang; onLangChan
     <header className="nav">
       <div className="container nav-inner">
         <Link href="/" className="brand">
-          <img src="/logo.png" alt="MunimAI logo" className="brand-logo" />
-          MunimAI
+          <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" />
+          Munim<span className="brand-ai">AI</span>&nbsp;OS
         </Link>
         <nav className="nav-links">
           <a href="/#features" className="nav-link hide-m">{t.features}</a>
@@ -61,8 +61,8 @@ export function SiteFooter({ lang = "en" }: { lang?: Lang }) {
         <div className="footer-grid">
           <div>
             <Link href="/" className="brand" style={{ marginBottom: 14, display: "inline-flex" }}>
-              <img src="/logo.png" alt="MunimAI logo" className="brand-logo" />
-              MunimAI
+              <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" />
+              Munim<span className="brand-ai">AI</span>&nbsp;OS
             </Link>
             <p className="footer-tag">
               {t.footerTag}

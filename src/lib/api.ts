@@ -1,4 +1,4 @@
-/* Typed client for the MunimAI cloud API. */
+/* Typed client for the MunimAI OS cloud API. */
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 

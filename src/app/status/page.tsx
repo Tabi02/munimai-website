@@ -1,6 +1,6 @@
 import { SiteNav, SiteFooter } from "../../components/site";
 
-export const metadata = { title: "System Status — MunimAI" };
+export const metadata = { title: "System Status — MunimAI OS" };
 
 const services: Array<[string, string, string, string]> = [
   ["Demo website", "online", "badge-green", "This preview site — running on temporary demo hosting"],
@@ -30,7 +30,7 @@ export default function StatusPage() {
           ))}
         </div>
         <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 32 }}>
-          MunimAI is in pre-launch. The desktop application is local-first and keeps working
+          MunimAI OS is in pre-launch. The desktop application is local-first and keeps working
           offline — a cloud outage never blocks your business data.
         </p>
       </main>

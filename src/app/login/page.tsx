@@ -42,7 +42,7 @@ export default function LoginPage() {
       <div className="hero-glow" />
       <Card className="auth-card">
         <Link href="/" className="brand" style={{ marginBottom: 26, display: "inline-flex" }}>
-          <img src="/logo.png" alt="MunimAI logo" className="brand-logo" style={{ width: 30, height: 30 }} /> MunimAI
+          <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" style={{ width: 30, height: 30 }} /> MunimAI OS
         </Link>
         <h1>Welcome back</h1>
         <p className="muted" style={{ marginBottom: 26 }}>Sign in to manage your subscription, licenses, and devices.</p>

@@ -9,7 +9,7 @@ export function LegalPage({ title, updated, children }: { title: string; updated
         <p style={{ color: "var(--muted)", marginBottom: 32 }}>Last updated: {updated}</p>
         <div className="legal-body">{children}</div>
         <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 40, borderTop: "1px solid var(--border)", paddingTop: 20 }}>
-          These documents are provided as standard starting terms for MunimAI. They should be reviewed by a
+          These documents are provided as standard starting terms for MunimAI OS. They should be reviewed by a
           qualified legal professional in your jurisdiction before commercial launch.
         </p>
       </main>

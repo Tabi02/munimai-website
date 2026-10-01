@@ -89,12 +89,12 @@ export function Spinner() {
   return <div className="skeleton" style={{ minHeight: 120 }} />;
 }
 
-/* Branded full-page loader: MunimAI logo with a pulsing ring + shimmer bar. */
+/* Branded full-page loader: MunimAI OS logo with a pulsing ring + shimmer bar. */
 export function BrandLoader({ label }: { label?: string }) {
   return (
     <div className="brand-loader" role="status" aria-live="polite">
       <div className="brand-loader-ring">
-        <img src="/logo.png" alt="MunimAI" className="brand-loader-logo" />
+        <img src="/logo.png" alt="MunimAI OS" className="brand-loader-logo" />
       </div>
       <div className="brand-loader-bar"><span /></div>
       {label && <p className="muted" style={{ fontSize: 13.5 }}>{label}</p>}

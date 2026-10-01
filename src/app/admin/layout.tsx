@@ -38,7 +38,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="dash">
       <aside className="sidebar">
         <Link href="/" className="brand" style={{ padding: "6px 14px 20px", display: "flex" }}>
-          <img src="/logo.png" alt="MunimAI logo" className="brand-logo" /> MunimAI Admin
+          <img src="/logo.png" alt="MunimAI OS logo" className="brand-logo" /> MunimAI OS Admin
         </Link>
         {LINKS.map((l) => (
           <Link key={l.href} href={l.href}

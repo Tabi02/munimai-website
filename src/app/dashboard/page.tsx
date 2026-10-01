@@ -120,7 +120,7 @@ export default function DashboardOverview() {
       <Card className="mt">
         <div className="card-title">Get the desktop app</div>
         <p className="card-sub">
-          Download MunimAI for your computer, install it, and activate with your license key above.
+          Download MunimAI OS for your computer, install it, and activate with your license key above.
           Your business data stays on your machines.
         </p>
         <div className="row-between mt" style={{ justifyContent: "flex-start" }}>

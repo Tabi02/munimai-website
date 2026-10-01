@@ -1,4 +1,4 @@
-/* MunimAI — Apple-style design system. Light-first, SF stack, flat color, generous whitespace. */
+/* MunimAI OS — Apple-style design system. Light-first, SF stack, flat color, generous whitespace. */
 
 :root,
 [data-theme="light"] {
@@ -94,6 +94,11 @@ a { color: inherit; }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 52px; }
 .brand { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; text-decoration: none; }
 .brand-logo { width: 26px; height: 26px; border-radius: 7px; object-fit: cover; }
+.brand-ai {
+  background: linear-gradient(135deg, #d4a94e 0%, #f2d57e 45%, #b8862f 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-weight: 800;
+}
 .brand-mark {
   width: 26px; height: 26px; border-radius: 7px;
   background: var(--accent);

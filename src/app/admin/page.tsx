@@ -28,7 +28,7 @@ export default function AdminOverview() {
   return (
     <>
       <h1 style={{ fontSize: 30, marginBottom: 4 }}>Platform overview</h1>
-      <p className="muted">The commercial health of MunimAI at a glance.</p>
+      <p className="muted">The commercial health of MunimAI OS at a glance.</p>
 
       <div className="stat-grid">
         <div className="stat">
