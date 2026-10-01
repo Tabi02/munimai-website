@@ -137,7 +137,7 @@ export default function DashboardOverview() {
       <section className="section-tight" style={{ borderTop: "1px solid var(--line)", paddingTop: 32 }}>
         <h2 style={{ fontSize: 22, marginBottom: 4 }}>Get the desktop app</h2>
         <p className="faint" style={{ marginBottom: 16, maxWidth: "64ch" }}>
-          Download MunimAI OS for your computer, install it, and activate with your license key above.
+          Download Aetros Biz for your computer, install it, and activate with your license key above.
           Your business data stays on your machines.
         </p>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>

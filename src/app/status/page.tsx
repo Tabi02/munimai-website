@@ -1,7 +1,7 @@
 import { SiteNav, SiteFooter } from "../../components/site";
 import { Badge } from "../../components/ui";
 
-export const metadata = { title: "System Status – MunimAI OS" };
+export const metadata = { title: "System Status – Aetros Biz" };
 
 const services: Array<[string, "green" | "amber" | "gray", string]> = [
   ["Demo website", "green", "This preview site, running on temporary demo hosting"],
@@ -32,7 +32,7 @@ export default function StatusPage() {
           ))}
         </div>
         <p className="faint" style={{ fontSize: 13, marginTop: 32 }}>
-          MunimAI OS is in pre-launch. The desktop application is local-first and keeps working
+          Aetros Biz is in pre-launch. The desktop application is local-first and keeps working
 offline: a cloud outage never blocks your business data.
         </p>
       </main>

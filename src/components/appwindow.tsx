@@ -3,7 +3,7 @@
 import type { CountryInfo } from "../lib/geo";
 import { priceForCountry } from "../lib/geo";
 
-/* Pure-CSS macOS window showing the MunimAI OS desktop app.
+/* Pure-CSS macOS window showing the Aetros Biz desktop app.
  * Looks like a real product screenshot, no AI-generated decoration. */
 
 function Icon({ d }: { d: string }) {
@@ -35,7 +35,7 @@ export function AppWindow({ country }: { country: CountryInfo }) {
     <div className="appwin" aria-hidden="true">
       <div className="appwin-bar">
         <div className="traffic"><i /><i /><i /></div>
-        <div className="appwin-title">MunimAI OS · Dashboard</div>
+        <div className="appwin-title">Aetros Biz · Dashboard</div>
         <div style={{ width: 52 }} />
       </div>
       <div className="appwin-body">

@@ -1,6 +1,6 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "Refund Policy | MunimAI OS" };
+export const metadata = { title: "Refund Policy | Aetros Biz" };
 
 export default function RefundPage() {
   return (

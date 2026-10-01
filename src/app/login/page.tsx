@@ -41,7 +41,7 @@ export default function LoginPage() {
   return (
     <div className="auth-wrap">
       <div className="auth-side">
-        <Link href="/" aria-label="MunimAI OS home" style={{ display: "inline-block", marginBottom: 32 }}>
+        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", marginBottom: 32 }}>
           <Wordmark />
         </Link>
         <h1>Welcome back.</h1>
@@ -55,7 +55,7 @@ export default function LoginPage() {
       <div className="auth-form-col">
         <div className="auth-card">
           <h2>Sign in</h2>
-          <p className="faint" style={{ marginBottom: 24 }}>Use your MunimAI OS account.</p>
+          <p className="faint" style={{ marginBottom: 24 }}>Use your Aetros Biz account.</p>
           {error && <div className="auth-error" role="alert">{error}</div>}
           <form onSubmit={submit}>
             <Field label="Email">
@@ -69,7 +69,7 @@ export default function LoginPage() {
           <p className="small faint" style={{ marginTop: 16 }}>
             Exploring? <button type="button" className="link-btn" onClick={fillDemo}>Fill the demo account</button> ({DEMO_EMAIL}).
           </p>
-          <p className="auth-alt">New to MunimAI OS? <Link href="/register">Create an account</Link></p>
+          <p className="auth-alt">New to Aetros Biz? <Link href="/register">Create an account</Link></p>
         </div>
       </div>
     </div>

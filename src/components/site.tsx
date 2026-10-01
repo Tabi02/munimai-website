@@ -16,9 +16,9 @@ const NAV_LINKS = [
 
 export function Wordmark({ compact = false }: { compact?: boolean }) {
   return (
-    <Link href="/" className="brand" aria-label="MunimAI OS home">
+    <Link href="/" className="brand" aria-label="Aetros Biz home">
       <img src="/logo.png" alt="" className="brand-logo" />
-      <span>Munim<span className="brand-ai">AI</span>&nbsp;OS</span>
+      <span>Aetros&nbsp;<span className="brand-ai">Biz</span></span>
     </Link>
   );
 }
@@ -126,7 +126,7 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="footer-base">
-          <span>© 2026 MunimAI OS. All rights reserved.</span>
+          <span>© 2026 Aetros Biz. All rights reserved.</span>
           <span className="right">
             <Link href="/terms">Terms</Link><span className="sep">·</span>
             <Link href="/privacy">Privacy</Link><span className="sep">·</span>

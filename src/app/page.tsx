@@ -35,7 +35,7 @@ const MODULES = [
 const FAQS = [
   {
     q: "Is my business data stored in the cloud?",
-    a: "No. MunimAI OS is local-first: your database lives on your own machine and the app works fully offline. The cloud is used only for licensing, billing and optional sync between your own devices.",
+    a: "No. Aetros Biz is local-first: your database lives on your own machine and the app works fully offline. The cloud is used only for licensing, billing and optional sync between your own devices.",
   },
   {
     q: "What does the AI need from me?",
@@ -74,7 +74,7 @@ export default function LandingPage() {
             <span className="hero-kicker"><span className="tick">●</span> Business operating system</span>
             <h1>One workspace for running your entire business.</h1>
             <p className="lede">
-              MunimAI OS brings customers, sales, inventory, finance and AI-assisted
+              Aetros Biz brings customers, sales, inventory, finance and AI-assisted
               workflows into one connected system. Local-first software that your
               business owns, priced honestly.
             </p>
@@ -172,7 +172,7 @@ export default function LandingPage() {
                   Which products should I reorder this week?
                 </div>
                 <div className="ai-msg">
-                  <span className="who">MunimAI · Inventory Manager</span>
+                  <span className="who">Aetros · Inventory Manager</span>
                   Two products are below reorder level. Mustard Oil 15L sells about 9 units a week and has 4 weeks of cover left.
                   <div className="rec">
                     <strong>Recommendation:</strong> raise a purchase order for 60 units of Mustard Oil 15L and 40 units of Tea Powder 1kg.
@@ -216,7 +216,7 @@ export default function LandingPage() {
                 <span className="eyebrow">Ownership</span>
                 <h2>Your data stays with you.</h2>
                 <p>
-                  MunimAI OS is local-first. The database lives on your machine,
+                  Aetros Biz is local-first. The database lives on your machine,
                   the app works without internet, and your subscription never
                   holds your records hostage.
                 </p>

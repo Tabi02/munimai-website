@@ -51,7 +51,7 @@ export default function SecurityPage() {
             <SectionHead
               eyebrow="Security"
               title="Serious about the books means serious about their safety."
-              lede="How MunimAI OS protects your data, your AI keys and your account. Written plainly, so you can hold us to it."
+              lede="How Aetros Biz protects your data, your AI keys and your account. Written plainly, so you can hold us to it."
             />
           </Reveal>
         </div>

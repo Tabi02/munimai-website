@@ -44,7 +44,7 @@ export default function RegisterPage() {
   return (
     <div className="auth-wrap">
       <div className="auth-side">
-        <Link href="/" aria-label="MunimAI OS home" style={{ display: "inline-block", marginBottom: 32 }}>
+        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", marginBottom: 32 }}>
           <Wordmark />
         </Link>
         <h1>Start your trial.</h1>

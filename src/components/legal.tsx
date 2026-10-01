@@ -31,7 +31,7 @@ export function LegalPage({ title, updated, children }: { title: string; updated
           <article className="legal-doc">
             {children}
             <p className="small faint" style={{ marginTop: 48, borderTop: "1px solid var(--line)", paddingTop: 20 }}>
-              These documents are standard starting terms for MunimAI OS. Have them reviewed by a
+              These documents are standard starting terms for Aetros Biz. Have them reviewed by a
               qualified legal professional in your jurisdiction before relying on them commercially.
             </p>
           </article>

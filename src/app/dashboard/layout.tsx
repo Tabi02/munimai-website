@@ -32,7 +32,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="dash">
       <aside className="dash-side">
-        <Link href="/" aria-label="MunimAI OS home" style={{ display: "inline-block", padding: "4px 10px 20px" }}>
+        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", padding: "4px 10px 20px" }}>
           <Wordmark compact />
         </Link>
         <nav aria-label="Account">

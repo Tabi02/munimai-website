@@ -111,7 +111,7 @@ export function AiWorkspace({ country }: { country: CountryInfo }) {
           Which invoices are overdue, and what should I do about them?
         </div>
         <div className="ai-msg">
-          <span className="who">MunimAI · Sales Manager</span>
+          <span className="who">Aetros · Sales Manager</span>
           2 invoices are overdue, totalling <strong className="num">{priceForCountry(941760, country)}</strong>:
           <div style={{ marginTop: 10 }}>
             <DataTable
@@ -173,7 +173,7 @@ export function ProductDemo({ country, initialTab }: { country: CountryInfo; ini
   return (
     <div className="demo-frame">
       <div className="demo-bar">
-        <span className="app-name">MunimAI OS</span>
+        <span className="app-name">Aetros Biz</span>
         <span className="app-sub">Sharma Traders · Pro plan · Works offline</span>
       </div>
       <div className="demo-win">

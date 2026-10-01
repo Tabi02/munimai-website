@@ -1,6 +1,6 @@
 import { SiteNav, SiteFooter } from "../../components/site";
 
-export const metadata = { title: "Support – MunimAI OS" };
+export const metadata = { title: "Support – Aetros Biz" };
 
 const topics = [
   ["License activation", "License key activate nahi ho rahi? Device limit ka error? Sabse pehle Settings → License me status check karo, phir device ko deactivate karke dobara activate karo."],

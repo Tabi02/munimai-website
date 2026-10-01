@@ -29,7 +29,7 @@ export default function DemoPage() {
             <SectionHead
               eyebrow="Live demo"
               title="Try the product with a sample business."
-              lede="Pick what you want to see. Everything below is a real part of MunimAI OS, illustrated with a sample wholesale business. No signup needed."
+              lede="Pick what you want to see. Everything below is a real part of Aetros Biz, illustrated with a sample wholesale business. No signup needed."
             />
           </Reveal>
           <Reveal delay={100}>

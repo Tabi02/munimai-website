@@ -8,7 +8,7 @@ const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "";
 const STEPS = [
   { t: "Download the portable ZIP", d: "One file, about 220 MB. No installer, no admin rights needed." },
   { t: "Extract it anywhere", d: "Right-click, Extract all. Your documents folder works fine." },
-  { t: "Run MunimAI OS", d: "Open the extracted folder and start the app. Your data is created on first run, on your machine." },
+  { t: "Run Aetros Biz", d: "Open the extracted folder and start the app. Your data is created on first run, on your machine." },
 ];
 
 export default function DownloadPage() {
@@ -21,7 +21,7 @@ export default function DownloadPage() {
           <Reveal>
             <SectionHead
               eyebrow="Download"
-              title="Get MunimAI OS for your desktop."
+              title="Get Aetros Biz for your desktop."
               lede="Local-first software. The download is the full product; your 14-day trial starts when you first run it."
             />
           </Reveal>

@@ -1,9 +1,9 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "Cookie Policy | MunimAI OS" };
+export const metadata = { title: "Cookie Policy | Aetros Biz" };
 
 const sections: [string, string][] = [
-  ["1. What we use", "The MunimAI OS website uses a small number of cookies and browser storage entries, and nothing more than it needs. There is no advertising on this site and we do not sell browsing data."],
+  ["1. What we use", "The Aetros Biz website uses a small number of cookies and browser storage entries, and nothing more than it needs. There is no advertising on this site and we do not sell browsing data."],
   ["2. Strictly necessary", "Sign-in sessions, security tokens and your remembered preferences (such as country, currency and language) are stored so the site works. Without these, sign-in and checkout cannot function."],
   ["3. Analytics", "We may use privacy-respecting, aggregated analytics to understand which pages are visited. Analytics never sees your business data, which lives in the desktop app on your machine."],
   ["4. The desktop app", "The desktop application does not use advertising cookies or cross-site trackers. It contacts our servers only for licensing, updates, and the cloud features you explicitly enable, such as device sync."],
