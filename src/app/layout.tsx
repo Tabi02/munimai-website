@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     "MunimAI aapki invoicing, inventory aur customers ko locally chalata hai — AI ke saath. No cloud lock-in. Aapka data aapke paas.",
   icons: { icon: "/favicon.png" },
+  verification: { google: "bx5m2MX3zJM3fhIEIfUisjmtKO4ip2kAeTGdF_1Lyug" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
