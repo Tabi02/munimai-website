@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# AI search crawlers are welcome to index public marketing pages
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://munim-ai.is-great.net/sitemap.xml
