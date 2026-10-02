@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SiteNav, SiteFooter } from "../../components/site";
 import { Button, SectionHead, Reveal } from "../../components/ui";
 import { PricingTable, pricingNote, useCountry } from "../../components/pricing";
+import { PlanFinder } from "../../components/planfinder";
 
 const FAQS = [
   {
@@ -69,6 +70,7 @@ export default function PricingPage() {
 
       <section className="section-tight">
         <div className="container">
+          <PlanFinder country={country} annual={annual} />
           <Reveal>
             <PricingTable country={country} annual={annual} onCurrency={setCountry} />
             <p className="small faint" style={{ marginTop: 16 }}>{pricingNote(country)}</p>

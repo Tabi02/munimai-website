@@ -968,3 +968,15 @@ strong { color: var(--ink); }
   .appwin-row { grid-template-columns: 1fr auto; }
   .appwin-row .inv { display: none; }
 }
+
+/* ---------- Plan finder ---------- */
+.plan-finder { border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--surface); padding: 28px 32px; margin-bottom: 36px; }
+.finder-q { margin: 20px 0; }
+.finder-q-label { font-weight: 600; font-size: 14.5px; margin: 0 0 10px; }
+.finder-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.finder-opt { padding: 9px 18px; border: 1px solid var(--line-strong); border-radius: var(--radius-s); background: var(--surface); font-family: var(--font-sans); font-size: 14px; color: var(--ink-2); cursor: pointer; }
+.finder-opt:hover { border-color: var(--ink-3); color: var(--ink); }
+.finder-opt.is-active { background: var(--accent); border-color: var(--accent-strong); color: #fff; font-weight: 600; }
+.finder-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.finder-result { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--line); margin-top: 24px; padding-top: 24px; }
+@media (max-width: 640px) { .plan-finder { padding: 20px; } }

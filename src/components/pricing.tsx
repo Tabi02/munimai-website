@@ -52,7 +52,7 @@ const ROWS: Array<{ cat?: string; label?: string; vals?: Array<string | null> }>
   { label: "Branches", vals: ["1", "1", "3", "Unlimited"] },
   { cat: "Product" },
   { label: "Customers, sales, inventory, finance", vals: ["yes", "yes", "yes", "yes"] },
-  { label: "AI workspace (7 specialists)", vals: [null, "yes", "yes", "yes"] },
+  { label: "AI workspace (14 specialists)", vals: [null, "yes", "yes", "yes"] },
   { label: "Automation workflows", vals: [null, "yes", "yes", "yes"] },
   { label: "WhatsApp and Telegram owner alerts", vals: [null, "yes", "yes", "yes"] },
   { label: "Motion Studio (product videos)", vals: [null, "yes", "yes", "yes"] },
