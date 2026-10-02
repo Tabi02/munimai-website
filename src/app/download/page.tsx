@@ -48,7 +48,7 @@ function Gate({ platform, label, note }: { platform: string; label: string; note
           color: "var(--ink)",
         }}
       />
-      <Button size="sm" disabled={state === "busy"}>
+      <Button size="sm" type="submit" disabled={state === "busy"}>
         {state === "busy" ? "Preparing…" : label}
       </Button>
       {note ? <span className="muted small" style={{ width: "100%" }}>{note}</span> : null}
