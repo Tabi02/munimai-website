@@ -9,20 +9,11 @@ import {
   StatusPill, StatStrip, RevenueChart, AiWorkspace, AutomationDemo,
 } from "../../components/demo";
 import { ProductExplorer } from "../../components/explorer";
+import { AITeam } from "../../components/aiteam";
 import {
   COUNTRIES, countryByCode, detectCountryCode, priceForCountry,
   storedCountryCode, type CountryInfo,
 } from "../../lib/geo";
-
-const SPECIALISTS = [
-  { name: "Business Manager", desc: "Answers questions about the whole business: sales trends, dues, what needs attention today." },
-  { name: "Accountant", desc: "Explains profit and loss, tax treatment and where the money went, in plain language." },
-  { name: "Sales Manager", desc: "Drafts quotations, follow-ups and payment reminders from real order history." },
-  { name: "Marketing Manager", desc: "Writes customer messages and campaign copy that fits your business voice." },
-  { name: "Inventory Manager", desc: "Watches stock levels and suggests purchase orders before you run out." },
-  { name: "Customer Support", desc: "Drafts replies to customer queries using their actual records." },
-  { name: "Product Manager", desc: "Summarises what sells, what does not, and what to stock next." },
-];
 
 function TourHead({ index, eyebrow, title }: { index: string; eyebrow: string; title: string }) {
   return (
@@ -208,33 +199,10 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* 05 AI WORKSPACE */}
-      <section className="tour-block" id="ai-workspace">
+      {/* 05 AI TEAM */}
+      <section className="section" id="ai-workspace">
         <div className="container">
-          <div className="split">
-            <Reveal>
-              <div>
-                <TourHead index="05" eyebrow="AI workspace" title="Fourteen specialists for fourteen jobs." />
-                <p>
-                  Seven assistants work with your business data: they analyse, explain
-                  and draft. Each one shows its reasoning and waits for your approval
-                  before anything is sent, recorded or ordered.
-                </p>
-                <ul className="spec-list">
-                  {SPECIALISTS.slice(0, 4).map((s) => (
-                    <li key={s.name}><strong>{s.name}</strong><span>{s.desc}</span></li>
-                  ))}
-                </ul>
-                <p className="small faint" style={{ marginTop: 16 }}>
-                  Plus Marketing Manager, Customer Support and Product Manager. AI uses
-                  your own API key, set once in Settings.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <AiWorkspace country={country} />
-            </Reveal>
-          </div>
+          <AITeam />
         </div>
       </section>
 

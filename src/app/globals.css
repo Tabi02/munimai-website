@@ -876,3 +876,24 @@ strong { color: var(--ink); }
   .explorer-row { grid-template-columns: 1fr; gap: 4px; }
   .explorer-panel { padding: 20px; }
 }
+
+/* ---------- AI Team showcase ---------- */
+.agent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 18px 0; }
+.agent-h { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); margin: 0 0 8px; font-family: var(--font-sans); }
+.agent-ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; line-height: 1.7; }
+.agent-approval { display: flex; gap: 10px; align-items: flex-start; border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; color: var(--ink-2); }
+.workflow { display: grid; grid-template-columns: 280px 1fr; border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--surface); overflow: hidden; }
+.workflow-steps { list-style: none; margin: 0; padding: 8px; border-right: 1px solid var(--line); background: var(--surface-2); display: flex; flex-direction: column; gap: 2px; }
+.workflow-steps li button { display: flex; gap: 10px; align-items: baseline; width: 100%; padding: 9px 12px; border: 1px solid transparent; border-radius: var(--radius-s); background: none; cursor: pointer; font-family: var(--font-sans); font-size: 13.5px; color: var(--ink-2); text-align: left; }
+.workflow-steps li button:hover { background: var(--surface-3); color: var(--ink); }
+.workflow-steps li.is-active button { background: var(--surface); border-color: var(--line-strong); color: var(--ink); font-weight: 600; }
+.workflow-steps li.is-done button { color: var(--ink-3); }
+.workflow-steps li button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.workflow-detail { padding: 28px 32px; min-height: 300px; }
+.workflow-detail p { color: var(--ink-2); max-width: 62ch; }
+@media (max-width: 760px) {
+  .workflow { grid-template-columns: 1fr; }
+  .workflow-steps { border-right: 0; border-bottom: 1px solid var(--line); flex-direction: row; overflow-x: auto; }
+  .workflow-steps li button { white-space: nowrap; }
+  .agent-grid { grid-template-columns: 1fr; }
+}
