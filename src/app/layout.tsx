@@ -28,7 +28,6 @@ export const metadata: Metadata = {
   title: "Aetros Biz | Business Operating System",
   description:
     "Aetros Biz is a business operating system for customers, sales, inventory, finance and AI-assisted workflows. Local-first desktop software with honest licensing.",
-  icons: { icon: "/favicon.png" },
   verification: { google: "bx5m2MX3zJM3fhIEIfUisjmtKO4ip2kAeTGdF_1Lyug" },
 };
 
