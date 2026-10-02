@@ -5,6 +5,7 @@ import { SiteNav, SiteFooter } from "../components/site";
 import { ProductDemo } from "../components/demo";
 import { AppWindow } from "../components/appwindow";
 import { DataFlowSection } from "../components/dataflow";
+import { ScrollStory } from "../components/scrollstory";
 import { Button, SectionHead, Reveal, DataTable, Badge, SplashIntro } from "../components/ui";
 import { PricingTable, pricingNote, useCountry } from "../components/pricing";
 import {
@@ -203,6 +204,13 @@ export default function LandingPage() {
             />
           </Reveal>
           <ProductDemo country={country} />
+        </div>
+      </section>
+
+      {/* ---------- scroll story: how it works ---------- */}
+      <section className="section" style={{ borderBottom: "1px solid var(--line)" }}>
+        <div className="container">
+          <ScrollStory />
         </div>
       </section>
 
