@@ -3,7 +3,9 @@
 import { SiteNav, SiteFooter } from "../../components/site";
 import { Button, SectionHead, Reveal, Badge } from "../../components/ui";
 
-const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "https://github.com/Tabi02/munimai-website/releases/download/aetros-biz-0.2.0/aetros-biz-0.2.0-win-portable.zip";
+const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "";
+const MAC_URL = process.env.NEXT_PUBLIC_MAC_DOWNLOAD_URL || "";
+const LINUX_URL = process.env.NEXT_PUBLIC_LINUX_DOWNLOAD_URL || "";
 
 const STEPS = [
   { t: "Download the portable ZIP", d: "One file, about 220 MB. No installer, no admin rights needed." },
@@ -44,14 +46,26 @@ export default function DownloadPage() {
                 </span>
               </div>
               <div className="mod-row" style={{ cursor: "default" }}>
-                <span className="mod-name">macOS <Badge>Planned</Badge></span>
-                <p className="mod-desc">Apple Silicon and Intel builds are on the roadmap. Join the trial on Windows meanwhile.</p>
-                <span className="mod-meta"><Button href="/register" variant="secondary" size="sm">Notify me</Button></span>
+                <span className="mod-name">macOS {MAC_URL ? <Badge tone="green">Available</Badge> : <Badge>Planned</Badge>}</span>
+                <p className="mod-desc">Apple Silicon and Intel disk images, about 230 MB. Unsigned build: on first launch, right-click the app and choose Open.</p>
+                <span className="mod-meta">
+                  {MAC_URL ? (
+                    <Button href={MAC_URL} size="sm">Download for macOS</Button>
+                  ) : (
+                    <Button href="/register" variant="secondary" size="sm">Notify me</Button>
+                  )}
+                </span>
               </div>
               <div className="mod-row" style={{ cursor: "default" }}>
-                <span className="mod-name">Linux <Badge>Planned</Badge></span>
-                <p className="mod-desc">AppImage and deb packages are on the roadmap.</p>
-                <span className="mod-meta"><Button href="/register" variant="secondary" size="sm">Notify me</Button></span>
+                <span className="mod-name">Linux {LINUX_URL ? <Badge tone="green">Available</Badge> : <Badge>Planned</Badge>}</span>
+                <p className="mod-desc">AppImage (runs anywhere) and deb package (Debian/Ubuntu), about 210 MB.</p>
+                <span className="mod-meta">
+                  {LINUX_URL ? (
+                    <Button href={LINUX_URL} size="sm">Download for Linux</Button>
+                  ) : (
+                    <Button href="/register" variant="secondary" size="sm">Notify me</Button>
+                  )}
+                </span>
               </div>
             </div>
           </Reveal>
