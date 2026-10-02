@@ -1008,3 +1008,13 @@ strong { color: var(--ink); }
   .story-step { padding: 24px 0; }
 }
 @media (prefers-reduced-motion: reduce) { .story-step { transition: none; opacity: 1; } }
+
+/* ---------- Loading / error / empty states ---------- */
+.skel-card { border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--surface); padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+.skel { border-radius: 4px; background: linear-gradient(90deg, var(--surface-3) 25%, var(--line) 50%, var(--surface-3) 75%); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; }
+.skel-line { height: 13px; }
+@keyframes skel { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skel { animation: none; background: var(--surface-3); } }
+.empty { border: 1px dashed var(--line-strong); border-radius: var(--radius-m); padding: 44px 28px; text-align: center; background: var(--surface); }
+.empty-title { font-family: var(--font-display); font-size: 19px; font-weight: 600; margin: 0 0 8px; }
+.empty-hint { color: var(--ink-2); font-size: 14.5px; margin: 0 0 16px; }

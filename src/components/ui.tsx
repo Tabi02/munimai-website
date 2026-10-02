@@ -205,3 +205,13 @@ export function SplashIntro() {
     </div>
   );
 }
+
+export function SkeletonCard() {
+  return (
+    <div className="skel-card" aria-hidden="true">
+      <div className="skel skel-line" style={{ width: "45%" }} />
+      <div className="skel skel-line" style={{ width: "80%" }} />
+      <div className="skel skel-line" style={{ width: "60%" }} />
+    </div>
+  );
+}
