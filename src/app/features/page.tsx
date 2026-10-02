@@ -8,6 +8,7 @@ import {
   CUSTOMERS, INVOICES, ORDERS, PRODUCTS,
   StatusPill, StatStrip, RevenueChart, AiWorkspace, AutomationDemo,
 } from "../../components/demo";
+import { ProductExplorer } from "../../components/explorer";
 import {
   COUNTRIES, countryByCode, detectCountryCode, priceForCountry,
   storedCountryCode, type CountryInfo,
@@ -51,6 +52,13 @@ export default function FeaturesPage() {
               lede="Six connected workspaces, one shared set of books. This is what each one looks like in daily use, with a sample wholesale business."
             />
           </Reveal>
+        </div>
+      </section>
+
+      {/* PRODUCT EXPLORER: all 63 features */}
+      <section className="section">
+        <div className="container">
+          <ProductExplorer />
         </div>
       </section>
 
