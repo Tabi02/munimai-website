@@ -10,6 +10,7 @@ import {
 } from "../../components/demo";
 import { ProductExplorer } from "../../components/explorer";
 import { AITeam } from "../../components/aiteam";
+import { IntelligenceSurface } from "../../components/intelligence";
 import {
   COUNTRIES, countryByCode, detectCountryCode, priceForCountry,
   storedCountryCode, type CountryInfo,
@@ -203,6 +204,13 @@ export default function FeaturesPage() {
       <section className="section" id="ai-workspace">
         <div className="container">
           <AITeam />
+        </div>
+      </section>
+
+      {/* INTELLIGENCE CONTROL SURFACE */}
+      <section className="section" style={{ borderTop: "1px solid var(--line)" }}>
+        <div className="container">
+          <IntelligenceSurface />
         </div>
       </section>
 
