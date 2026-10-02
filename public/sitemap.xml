@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://munimai-website.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://munimai-website.vercel.app/demo</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://munimai-website.vercel.app/register</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://munimai-website.vercel.app/login</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://munimai-website.vercel.app/support</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://munimai-website.vercel.app/status</loc><changefreq>daily</changefreq><priority>0.4</priority></url>
-  <url><loc>https://munimai-website.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munimai-website.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munimai-website.vercel.app/refund-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/demo</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/register</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/login</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/support</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/status</loc><changefreq>daily</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/refund-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
