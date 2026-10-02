@@ -11,7 +11,7 @@ const NEEDS: Array<{ tab: TabId; label: string; hint: string; note: string }> = 
   { tab: "inventory", label: "Stock and inventory", hint: "Levels, reorder points", note: "Stock moves the moment an order is confirmed. Reorder points warn you before a shelf goes empty." },
   { tab: "customers", label: "Customers", hint: "Records, history, dues", note: "Every customer gets a record with contact details, open dues, payment history and notes." },
   { tab: "finance", label: "Reports and accounts", hint: "P&L, expenses, tax", note: "Expenses, profit and loss, and tax-aware reporting that match how small businesses actually file." },
-  { tab: "ai", label: "AI assistance", hint: "Questions, drafts, approvals", note: "Seven specialists analyse your real records, recommend the next step, and wait for your approval." },
+  { tab: "ai", label: "AI assistance", hint: "Questions, drafts, approvals", note: "Fourteen specialists analyse your real records, recommend the next step, and wait for your approval." },
   { tab: "automation", label: "Automation", hint: "Reminders, alerts", note: "Overdue reminders, low-stock alerts and follow-ups that run themselves, with you in control." },
 ];
 

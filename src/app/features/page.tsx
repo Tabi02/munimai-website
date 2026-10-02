@@ -206,7 +206,7 @@ export default function FeaturesPage() {
           <div className="split">
             <Reveal>
               <div>
-                <TourHead index="05" eyebrow="AI workspace" title="Seven specialists for seven jobs." />
+                <TourHead index="05" eyebrow="AI workspace" title="Fourteen specialists for fourteen jobs." />
                 <p>
                   Seven assistants work with your business data: they analyse, explain
                   and draft. Each one shows its reasoning and waits for your approval
