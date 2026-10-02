@@ -121,10 +121,13 @@ export default function DownloadPage() {
             </Reveal>
             <Reveal delay={120}>
               <ol className="steps">
-                {STEPS.map((s) => (
+                {STEPS.map((s, i) => (
                   <li key={s.t}>
-                    <strong>{s.t}</strong>
-                    <p className="muted">{s.d}</p>
+                    <span className="step-n num">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{s.t}</strong>
+                      <p className="muted">{s.d}</p>
+                    </div>
                   </li>
                 ))}
               </ol>
