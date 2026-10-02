@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { SiteNav, SiteFooter } from "../components/site";
 import { ProductDemo } from "../components/demo";
+import { AppWindow } from "../components/appwindow";
 import { Button, SectionHead, Reveal, DataTable, Badge, SplashIntro } from "../components/ui";
 import { PricingTable, pricingNote, useCountry } from "../components/pricing";
 import {
@@ -163,9 +164,9 @@ export default function LandingPage() {
       <SplashIntro />
       <SiteNav />
 
-      {/* ---------- hero ---------- */}
+      {/* ---------- hero: product workspace ---------- */}
       <section className="hero">
-        <div className="container">
+        <div className="container hero-grid">
           <Reveal>
             <span className="hero-kicker"><span className="tick">●</span> Business operating system</span>
             <h1>One workspace for running your entire business.</h1>
@@ -176,17 +177,31 @@ export default function LandingPage() {
             </p>
             <div className="hero-cta">
               <Button href="/register" size="lg">Start free trial</Button>
-              <Button href="/features" variant="secondary" size="lg">See the product</Button>
+              <Button href="/demo" variant="secondary" size="lg">Explore the workspace</Button>
             </div>
             <p className="hero-note">Free 14-day trial · No credit card required · Works fully offline</p>
           </Reveal>
 
           <Reveal delay={120}>
-            <ProductDemo country={country} />
+            <AppWindow country={country} />
             <p className="small faint" style={{ marginTop: 12 }}>
-              Illustrated with a sample wholesale business. Every screen above is a real part of the product.
+              The actual product interface, illustrated with a sample wholesale business.
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- interactive demo ---------- */}
+      <section className="section" style={{ borderBottom: "1px solid var(--line)" }}>
+        <div className="container">
+          <Reveal>
+            <SectionHead
+              eyebrow="Interactive demo"
+              title="Explore the workspace."
+              lede="Seven connected areas of the product, running on clearly labelled sample data. This is what each one looks like in daily use."
+            />
+          </Reveal>
+          <ProductDemo country={country} />
         </div>
       </section>
 

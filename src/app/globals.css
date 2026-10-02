@@ -904,3 +904,10 @@ strong { color: var(--ink); }
 .intel-row dt { font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); font-family: var(--font-sans); padding-top: 2px; }
 .intel-row dd { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
 @media (max-width: 760px) { .intel-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- hero: product workspace layout ---------- */
+.hero-grid { display: grid; grid-template-columns: minmax(340px, 5fr) 7fr; gap: 56px; align-items: center; padding-bottom: 72px; }
+.hero-grid h1 { max-width: 14ch; }
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 48px; }
+}
