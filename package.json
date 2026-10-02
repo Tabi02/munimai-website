@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "@types/three": "^0.186.0",
     "next": "^15.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "three": "^0.186.1"
   },
   "description": "Business AI OS — marketing site, customer dashboard, and admin console.",
   "devDependencies": {
