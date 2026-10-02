@@ -11,4 +11,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://munimai-website.vercel.app/sitemap.xml
+Sitemap: https://aetros-biz.vercel.app/sitemap.xml
