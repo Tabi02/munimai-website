@@ -112,6 +112,27 @@ export default function DownloadPage() {
 
       <section className="section-tight" style={{ borderTop: "1px solid var(--line)" }}>
         <div className="container">
+          <Reveal>
+            <SectionHead
+              eyebrow="AI Models"
+              title="Download AI models separately."
+              lede="The app works without these. Download a model to run Aetros AI 100% offline on your own computer — no cloud, no API key needed."
+            />
+          </Reveal>
+          <Reveal>
+            <div>
+              <div className="mod-row" style={{ cursor: "default" }}>
+                <span className="mod-name">Aetros-1 <Badge tone="green">Available</Badge></span>
+                <p className="mod-desc">Your own trained model (Qwen3-4B fine-tune, Q4_K_M GGUF, ~2.4 GB). Place the file as <code>Aetros-1-Q4_K_M.gguf</code> in the app&apos;s <code>aetros-ai/models</code> folder, then enable it in Settings → AI. Runs fully offline.</p>
+                <span className="mod-meta"><Gate platform="aetros-1" label="Download Aetros-1 (~2.4 GB)" /></span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-tight" style={{ borderTop: "1px solid var(--line)" }}>
+        <div className="container">
           <div className="split-narrow">
             <Reveal>
               <div>
