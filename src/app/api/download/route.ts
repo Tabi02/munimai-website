@@ -7,11 +7,11 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
    R2 credentials are server-side only; the bucket stays private. */
 
 const FILES: Record<string, string> = {
-  windows: "aetros-biz-0.4.5-win-portable.zip",
-  "mac-arm64": "aetros-biz-0.4.5-arm64.zip",
-  "mac-x64": "aetros-biz-0.4.5-x64.zip",
-  "linux-appimage": "aetros-biz-0.4.5-x86_64.AppImage",
-  "linux-deb": "aetros-biz-0.4.5-amd64.deb",
+  windows: "aetros-biz-0.4.6-win-portable.zip",
+  "mac-arm64": "aetros-biz-0.4.6-arm64.zip",
+  "mac-x64": "aetros-biz-0.4.6-x64.zip",
+  "linux-appimage": "aetros-biz-0.4.6-x86_64.AppImage",
+  "linux-deb": "aetros-biz-0.4.6-amd64.deb",
   "aetros-1": "aetros-1/Qwen3-4B.Q4_K_M.gguf",
 };
 
