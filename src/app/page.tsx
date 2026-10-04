@@ -166,7 +166,7 @@ export default function LandingPage() {
             animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
           >
-            The analyst you <em>didn\u2019t have to hire.</em>
+            The analyst you <em>didn't have to hire.</em>
           </motion.h1>
           <motion.p
             className="om-sub"
@@ -174,7 +174,7 @@ export default function LandingPage() {
             animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
             transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
           >
-            Aetros Biz runs your shop\u2019s data on your own computer. Twenty-six
+            Aetros Biz runs your shop's data on your own computer. Twenty-six
             intelligence modules watch sales, stock, cash and customers \u2014 and
             ask your approval before acting.
           </motion.p>
@@ -299,7 +299,7 @@ export default function LandingPage() {
           <Reveal>
             <div className="om-cta">
               <h2>All the intelligence.<br />None of the cloud fees.</h2>
-              <p>Aetros Biz is free while we\u2019re building. Download it, run it on your own machine, keep every rupee of insight.</p>
+              <p>Aetros Biz is free while we're building. Download it, run it on your own machine, keep every rupee of insight.</p>
               <div className="om-ticks"><span>Free download</span><span>Works offline</span><span>No account needed</span></div>
               <Button href="/download" size="lg" variant="white">Download Aetros Biz</Button>
             </div>

@@ -38,7 +38,7 @@ export function CtaBand({ title, body, actions }: {
         <Reveal>
           <div className="om-cta">
             <h2>{title ?? <>All the intelligence.<br />None of the cloud fees.</>}</h2>
-            <p>{body ?? "Aetros Biz is free while we\u2019re building. Download it, run it on your own machine, keep every rupee of insight."}</p>
+            <p>{body ?? "Aetros Biz is free while we're building. Download it, run it on your own machine, keep every rupee of insight."}</p>
             <div className="om-ticks"><span>Free download</span><span>Works offline</span><span>No account needed</span></div>
             {actions ?? <Button href="/download" size="lg" variant="white">Download Aetros Biz</Button>}
           </div>
