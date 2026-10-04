@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../lib/auth";
 import { ApiError } from "../../lib/api";
 import { Button, Field } from "../../components/ui";
-import { Wordmark } from "../../components/site";
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -44,16 +43,17 @@ export default function RegisterPage() {
   return (
     <div className="auth-wrap">
       <div className="auth-side">
-        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", marginBottom: 32 }}>
-          <Wordmark />
+        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", position: "relative", zIndex: 1, textDecoration: "none" }}>
+          <span style={{ color: "#fff", fontWeight: 800, fontSize: 17, letterSpacing: "-0.01em" }}>Aetros&nbsp;Biz</span>
         </Link>
         <h1>Start your trial.</h1>
         <p>14 days free on every plan. No credit card required.</p>
         <ul className="auth-points">
-          <li><strong>Full product, not a demo</strong>Every module and all seven AI specialists are included from day one.</li>
-          <li><strong>Your data, your machine</strong>The database lives on your computer. Cancel any time and keep everything.</li>
-          <li><strong>Honest pricing</strong>Prices adapt to your country. See the full table before you commit.</li>
+          <li><span className="auth-point-ic">◈</span><span><strong>Full product, not a demo</strong>Every module and all seven AI specialists are included from day one.</span></li>
+          <li><span className="auth-point-ic">◈</span><span><strong>Your data, your machine</strong>The database lives on your computer. Cancel any time and keep everything.</span></li>
+          <li><span className="auth-point-ic">◈</span><span><strong>Honest pricing</strong>Prices adapt to your country. See the full table before you commit.</span></li>
         </ul>
+        <div className="auth-side-foot">Your data stays on your computer. Always.</div>
       </div>
       <div className="auth-form-col">
         <div className="auth-card">

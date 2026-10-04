@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useAuth, DEMO_EMAIL, DEMO_PASSWORD } from "../../lib/auth";
 import { ApiError } from "../../lib/api";
 import { Button, Field } from "../../components/ui";
-import { Wordmark } from "../../components/site";
 
 export default function LoginPage() {
   const { login, loading } = useAuth();
@@ -41,16 +40,17 @@ export default function LoginPage() {
   return (
     <div className="auth-wrap">
       <div className="auth-side">
-        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", marginBottom: 32 }}>
-          <Wordmark />
+        <Link href="/" aria-label="Aetros Biz home" style={{ display: "inline-block", position: "relative", zIndex: 1, textDecoration: "none" }}>
+          <span style={{ color: "#fff", fontWeight: 800, fontSize: 17, letterSpacing: "-0.01em" }}>Aetros&nbsp;Biz</span>
         </Link>
         <h1>Welcome back.</h1>
-        <p>Sign in to manage your subscription, licenses and devices.</p>
+        <p>Sign in to manage your subscription, licenses and devices — everything that powers your business OS.</p>
         <ul className="auth-points">
-          <li><strong>One account, every device</strong>Your license follows your account across your machines.</li>
-          <li><strong>Billing and invoices</strong>View plans, receipts and renewal dates.</li>
-          <li><strong>Device management</strong>See licensed devices and deactivate a lost one.</li>
+          <li><span className="auth-point-ic">◈</span><span><strong>One account, every device</strong>Your license follows your account across your machines.</span></li>
+          <li><span className="auth-point-ic">◈</span><span><strong>Billing and invoices</strong>View plans, receipts and renewal dates.</span></li>
+          <li><span className="auth-point-ic">◈</span><span><strong>Device management</strong>See licensed devices and deactivate a lost one.</span></li>
         </ul>
+        <div className="auth-side-foot">Your data stays on your computer. Always.</div>
       </div>
       <div className="auth-form-col">
         <div className="auth-card">
@@ -66,7 +66,7 @@ export default function LoginPage() {
             </Field>
             <Button type="submit" block disabled={busy}>{busy ? "Signing in…" : "Sign in"}</Button>
           </form>
-          <p className="small faint" style={{ marginTop: 16 }}>
+          <p className="auth-demo">
             Exploring? <button type="button" className="link-btn" onClick={fillDemo}>Fill the demo account</button> ({DEMO_EMAIL}).
           </p>
           <p className="auth-alt">New to Aetros Biz? <Link href="/register">Create an account</Link></p>

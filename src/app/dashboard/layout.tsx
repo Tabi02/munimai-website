@@ -51,7 +51,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Link>
           )}
         </nav>
-        <div style={{ marginTop: "auto", padding: "16px 10px 0", borderTop: "1px solid var(--line)" }}>
+        <div className="dash-user">
           <p className="small" style={{ padding: "0 10px 10px", margin: 0 }}>
             <strong>{user.display_name}</strong><br />
             <span className="faint">{orgs[0]?.name}</span>
