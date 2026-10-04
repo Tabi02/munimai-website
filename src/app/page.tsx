@@ -108,6 +108,41 @@ const DIFFS: Array<{ icon: string; name: string; desc: React.ReactNode; meta: st
   },
 ];
 
+/* ---------- module card icons: geometric tiles, accent wash ---------- */
+function ModIcon({ name }: { name: string }) {
+  const paths: Record<string, React.ReactNode> = {
+    customers: (<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3.2" /></>),
+    sales: (<><path d="M12 3l7 9-7 9-7-9z" /></>),
+    inventory: (<><path d="M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5z" /><path d="M12 12l8.2-4.75M12 12v9.5M12 12L3.8 7.25" /></>),
+    finance: (<><path d="M4 15a8 8 0 0116 0" /><path d="M4 15h16" /><path d="M12 7v2" /></>),
+    ai: (<><path d="M12 3l2.2 6.6L21 12l-6.8 2.4L12 21l-2.2-6.6L3 12l6.8-2.4z" /></>),
+    automation: (<><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 12l2.2 2.2L15.5 10" /></>),
+  };
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true">
+      {paths[name]}
+    </svg>
+  );
+}
+
+const MODULE_ICONS: Record<string, string> = {
+  Customers: "customers",
+  Sales: "sales",
+  Inventory: "inventory",
+  Finance: "finance",
+  "AI Workspace": "ai",
+  Automation: "automation",
+};
+
+const TRUST: Array<{ n: string; t: string }> = [
+  { n: "26", t: "Intelligence modules built in" },
+  { n: "100%", t: "Offline \u2014 your data never leaves" },
+  { n: "5", t: "Platform installers, one download" },
+  { n: "0", t: "Monthly cloud fees required" },
+];
+
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
@@ -169,27 +204,40 @@ export default function LandingPage() {
       {/* ---------- hero: product workspace ---------- */}
       <section className="hero">
         <div className="container hero-grid">
-          <Reveal>
+          <div className="hero-enter">
             <span className="hero-kicker"><span className="tick">●</span> Business operating system</span>
-            <h1>One workspace for running your entire business.</h1>
+            <h1>Your data. Your computer. <span className="accent-text">Your AI.</span></h1>
             <p className="lede">
-              Aetros Biz brings customers, sales, inventory, finance and AI-assisted
-              workflows into one connected system. Local-first software that your
-              business owns, priced honestly.
+              Aetros Biz runs your entire business \u2014 sales, inventory,
+              finance, team \u2014 on your own machine. No cloud lock-in, no
+              monthly ransom. With 26 built-in intelligence modules that think
+              with your data.
             </p>
             <div className="hero-cta">
               <Button href="/register" size="lg">Start free trial</Button>
-              <Button href="/demo" variant="secondary" size="lg">Explore the workspace</Button>
+              <Button href="/demo" variant="secondary" size="lg">See it in action</Button>
             </div>
-            <p className="hero-note">Free 14-day trial · No credit card required · Works fully offline</p>
-          </Reveal>
+            <p className="hero-note">Free 14-day trial \u00b7 No credit card \u00b7 Works fully offline</p>
+          </div>
 
-          <Reveal delay={120}>
+          <div className="appwin-enter">
             <AppWindow country={country} />
             <p className="small faint" style={{ marginTop: 12 }}>
               The actual product interface, illustrated with a sample wholesale business.
             </p>
-          </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- trust strip ---------- */}
+      <section className="trust-strip" aria-label="Aetros Biz at a glance">
+        <div className="container trust-grid">
+          {TRUST.map((t) => (
+            <div key={t.t}>
+              <div className="trust-n num">{t.n}</div>
+              <div className="trust-t">{t.t}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -232,12 +280,13 @@ export default function LandingPage() {
             />
           </Reveal>
           <Reveal>
-            <div>
+            <div className="mod-cards">
               {MODULES.map((m) => (
-                <a className="mod-row" href="/features" key={m.name}>
-                  <span className="mod-name">{m.name}</span>
-                  <p className="mod-desc">{m.desc}</p>
-                  <span className="mod-meta">{m.meta}</span>
+                <a className="mod-card" href="/features" key={m.name}>
+                  <span className="mod-icon" aria-hidden="true"><ModIcon name={MODULE_ICONS[m.name] || "automation"} /></span>
+                  <h3 className="mod-card-name">{m.name}</h3>
+                  <p className="mod-card-desc">{m.desc}</p>
+                  <span className="mod-card-meta">{m.meta}</span>
                 </a>
               ))}
             </div>
@@ -427,12 +476,11 @@ export default function LandingPage() {
           <Reveal>
             <div className="cta-panel">
               <div>
-                <h2>Run your business on a system you own.</h2>
-                <p>Start a free 14-day trial. Import your customers in an afternoon.</p>
+                <h2>Try it on your own machine.</h2>
+                <p>14 days free. Your data stays yours \u2014 always.</p>
               </div>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <Button href="/register" size="lg">Start free trial</Button>
-                <Button href="/download" variant="secondary" size="lg">Download</Button>
+                <a className="btn btn-lg btn-white" href="/download">Download Aetros Biz</a>
               </div>
             </div>
           </Reveal>
