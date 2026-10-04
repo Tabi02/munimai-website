@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { SiteNav, SiteFooter } from "../../components/site";
-import { Button, SectionHead, Reveal, Badge } from "../../components/ui";
+import { Button, Reveal, Badge } from "../../components/ui";
+import { PageHero, CtaBand } from "../../components/om";
 
 function Gate({ platform, label, note }: { platform: string; label: string; note?: string }) {
   const [email, setEmail] = useState("");
@@ -68,17 +69,11 @@ export default function DownloadPage() {
     <>
       <SiteNav />
 
-      <section className="section-tight" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container" style={{ paddingTop: 40 }}>
-          <Reveal>
-            <SectionHead
-              eyebrow="Download"
-              title="Get Aetros Biz for your desktop."
-              lede="Enter your work email and the download starts right away. Your 14-day trial begins when you first run the app."
-            />
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        kicker="Download"
+        title="Get Aetros Biz for your desktop."
+        lede="Enter your work email and the download starts right away. Your 14-day trial begins when you first run the app."
+      />
 
       <section className="section-tight">
         <div className="container">
@@ -110,14 +105,12 @@ export default function DownloadPage() {
         </div>
       </section>
 
-      <section className="section-tight" style={{ borderTop: "1px solid var(--line)" }}>
+      <section className="om-block" style={{ paddingTop: 72 }}>
         <div className="container">
           <Reveal>
-            <SectionHead
-              eyebrow="AI Models"
-              title="Download AI models separately."
-              lede="The app works without these. Download a model to run Aetros AI 100% offline on your own computer — no cloud, no API key needed."
-            />
+            <div className="om-kicker">AI Models</div>
+            <h2 className="om-h2" style={{ fontSize: "clamp(28px, 3.4vw, 42px)" }}>Download AI models separately.</h2>
+            <p className="om-lead">The app works without these. Download a model to run Aetros AI 100% offline on your own computer — no cloud, no API key needed.</p>
           </Reveal>
           <Reveal>
             <div>
@@ -131,31 +124,28 @@ export default function DownloadPage() {
         </div>
       </section>
 
-      <section className="section-tight" style={{ borderTop: "1px solid var(--line)" }}>
+      <section className="om-block" style={{ paddingTop: 72 }}>
         <div className="container">
-          <div className="split-narrow">
-            <Reveal>
-              <div>
-                <span className="eyebrow">Install</span>
-                <h2>Running in three steps.</h2>
+          <Reveal>
+            <div className="om-kicker">Install</div>
+            <h2 className="om-h2" style={{ fontSize: "clamp(28px, 3.4vw, 42px)" }}>Running in three steps.</h2>
+          </Reveal>
+          <div className="om-steps">
+            {STEPS.map((s, i) => (
+              <div className="om-step" key={s.t}>
+                <div className="om-sn">{String(i + 1).padStart(2, "0")}</div>
+                <h4>{s.t}</h4>
+                <p>{s.d}</p>
               </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <ol className="steps">
-                {STEPS.map((s, i) => (
-                  <li key={s.t}>
-                    <span className="step-n num">{String(i + 1).padStart(2, "0")}</span>
-                    <div>
-                      <strong>{s.t}</strong>
-                      <p className="muted">{s.d}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </Reveal>
+            ))}
           </div>
         </div>
       </section>
+
+      <CtaBand
+        title={<>Your data stays home.<br />Your AI comes with you.</>}
+        body="One download, five platforms, zero cloud fees. The 14-day trial starts the first time you open the app."
+      />
 
       <SiteFooter />
     </>

@@ -1233,3 +1233,9 @@ strong { color: var(--ink); }
   .om-cta { padding: 60px 28px; }
   .om-block { padding: 72px 0 0; }
 }
+
+/* ---------- inner-page hero + shared band ---------- */
+.om-page-hero { text-align: center; padding: 72px 0 8px; border-bottom: 1px solid var(--line); }
+.om-page-hero .container { padding-bottom: 56px; }
+.om-ph-title { font-size: clamp(36px, 4.6vw, 58px); letter-spacing: -0.024em; line-height: 1.06; max-width: 840px; margin: 18px auto 0; font-weight: 600; }
+.om-page-hero .om-lead { margin-top: 18px; }

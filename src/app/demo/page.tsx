@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { SiteNav, SiteFooter } from "../../components/site";
-import { Button, SectionHead, Reveal } from "../../components/ui";
+import { Button, Reveal } from "../../components/ui";
+import { PageHero, CtaBand } from "../../components/om";
 import { ProductDemo, type TabId } from "../../components/demo";
 import { countryByCode } from "../../lib/geo";
 
@@ -23,34 +24,27 @@ export default function DemoPage() {
     <>
       <SiteNav />
 
-      <section className="section-tight" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container" style={{ paddingTop: 40 }}>
-          <Reveal>
-            <SectionHead
-              eyebrow="Live demo"
-              title="Try the product with a sample business."
-              lede="Pick what you want to see. Everything below is a real part of Aetros Biz, illustrated with a sample wholesale business. No signup needed."
-            />
-          </Reveal>
-          <Reveal delay={100}>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 8 }}>
-              {NEEDS.map((n) => (
-                <button
-                  key={n.tab}
-                  type="button"
-                  className={`chip${n.tab === tab ? " chip-on" : ""}`}
-                  onClick={() => setTab(n.tab)}
-                  aria-pressed={n.tab === tab}
-                >
-                  <strong>{n.label}</strong>
-                  <span>{n.hint}</span>
-                </button>
-              ))}
-            </div>
-            <p className="small faint" style={{ marginTop: 14, maxWidth: "72ch" }}>{active.note}</p>
-          </Reveal>
+      <PageHero
+        kicker="Live demo"
+        title="Try the product with a sample business."
+        lede="Pick what you want to see. Everything below is a real part of Aetros Biz, illustrated with a sample wholesale business. No signup needed."
+      >
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 32, justifyContent: "center" }}>
+          {NEEDS.map((n) => (
+            <button
+              key={n.tab}
+              type="button"
+              className={`chip${n.tab === tab ? " chip-on" : ""}`}
+              onClick={() => setTab(n.tab)}
+              aria-pressed={n.tab === tab}
+            >
+              <strong>{n.label}</strong>
+              <span>{n.hint}</span>
+            </button>
+          ))}
         </div>
-      </section>
+        <p className="small faint" style={{ marginTop: 16, maxWidth: "72ch", marginLeft: "auto", marginRight: "auto" }}>{active.note}</p>
+      </PageHero>
 
       <section className="section-tight">
         <div className="container">
@@ -66,6 +60,8 @@ export default function DemoPage() {
           </Reveal>
         </div>
       </section>
+
+      <CtaBand />
 
       <SiteFooter />
     </>

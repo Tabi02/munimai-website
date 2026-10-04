@@ -1,7 +1,8 @@
 "use client";
 
 import { SiteNav, SiteFooter } from "../../components/site";
-import { Button, SectionHead, Reveal } from "../../components/ui";
+import { Button, Reveal } from "../../components/ui";
+import { PageHero, CtaBand } from "../../components/om";
 
 const GROUPS: Array<{ title: string; rows: Array<[string, string]> }> = [
   {
@@ -45,17 +46,11 @@ export default function SecurityPage() {
     <>
       <SiteNav />
 
-      <section className="section-tight" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container" style={{ paddingTop: 40 }}>
-          <Reveal>
-            <SectionHead
-              eyebrow="Security"
-              title="Serious about the books means serious about their safety."
-              lede="How Aetros Biz protects your data, your AI keys and your account. Written plainly, so you can hold us to it."
-            />
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        kicker="Security"
+        title="Serious about the books means serious about their safety."
+        lede="How Aetros Biz protects your data, your AI keys and your account. Written plainly, so you can hold us to it."
+      />
 
       {GROUPS.map((g, gi) => (
         <section key={g.title} className="section-tight" style={gi > 0 ? { borderTop: "1px solid var(--line)" } : undefined}>
@@ -79,22 +74,16 @@ export default function SecurityPage() {
         </section>
       ))}
 
-      <section className="cta-band">
-        <div className="container">
-          <Reveal>
-            <div className="cta-panel">
-              <div>
-                <h2>Questions about security?</h2>
-                <p>Write to us. We answer plainly and in detail.</p>
-              </div>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <Button href="/support" size="lg">Contact support</Button>
-                <Button href="/status" variant="secondary" size="lg">System status</Button>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CtaBand
+        title={<>Questions about security?</>}
+        body="Write to us. We answer plainly and in detail."
+        actions={
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+            <Button href="/support" size="lg" variant="white">Contact support</Button>
+            <Button href="/status" size="lg" variant="secondary">System status</Button>
+          </div>
+        }
+      />
 
       <SiteFooter />
     </>

@@ -14,11 +14,16 @@ export function LegalPage({ title, updated, children }: { title: string; updated
   return (
     <>
       <SiteNav />
+      <div className="om-page-hero" style={{ borderBottom: "1px solid var(--line)" }}>
+        <div className="container" style={{ paddingBottom: 48 }}>
+          <Reveal>
+            <div className="om-kicker">Legal</div>
+            <h1 className="om-ph-title">{title}</h1>
+            <p className="om-lead">Last updated {updated}</p>
+          </Reveal>
+        </div>
+      </div>
       <div className="container" style={{ paddingTop: 56, paddingBottom: 72 }}>
-        <Reveal>
-          <p className="legal-meta">{title} · Last updated {updated}</p>
-          <h1 style={{ fontSize: "clamp(30px, 3.6vw, 44px)", marginBottom: 40 }}>{title}</h1>
-        </Reveal>
         <div className="legal-wrap">
           <nav className="legal-toc hide-m" aria-label="Legal documents">
             {DOCS.map((d) => (

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { SiteNav, SiteFooter } from "../../components/site";
-import { Button, SectionHead, Reveal } from "../../components/ui";
+import { Button, Reveal } from "../../components/ui";
+import { PageHero, CtaBand } from "../../components/om";
 import { PricingTable, pricingNote, useCountry } from "../../components/pricing";
 import { PlanFinder } from "../../components/planfinder";
 
@@ -32,12 +33,12 @@ const FAQS = [
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`faq-item${open ? " open" : ""}`}>
-      <button className="faq-q" onClick={() => setOpen(!open)} aria-expanded={open}>
+    <div className={`om-qa${open ? " open" : ""}`}>
+      <button className="om-qa-q" onClick={() => setOpen(!open)} aria-expanded={open}>
         {q}
-        <span className="pm">{open ? "–" : "+"}</span>
+        <span className="om-qa-pm">{open ? "–" : "+"}</span>
       </button>
-      {open && <div className="faq-a">{a}</div>}
+      {open && <div className="om-qa-a">{a}</div>}
     </div>
   );
 }
@@ -50,23 +51,16 @@ export default function PricingPage() {
     <>
       <SiteNav />
 
-      <section className="section-tight" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container" style={{ paddingTop: 40 }}>
-          <Reveal>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24, flexWrap: "wrap" }}>
-              <SectionHead
-                eyebrow="Pricing"
-                title="Pricing that respects a small business budget."
-                lede="Per business, per month. Every plan includes the full product, local-first software and free updates. Prices adapt to your country."
-              />
-              <div className="bill-toggle" role="group" aria-label="Billing frequency">
-                <button aria-pressed={!annual} onClick={() => setAnnual(false)}>Monthly</button>
-                <button aria-pressed={annual} onClick={() => setAnnual(true)}>Annual</button>
-              </div>
-            </div>
-          </Reveal>
+      <PageHero
+        kicker="Pricing"
+        title="Pricing that respects a small business budget."
+        lede="Per business, per month. Every plan includes the full product, local-first software and free updates. Prices adapt to your country."
+      >
+        <div className="bill-toggle" role="group" aria-label="Billing frequency" style={{ marginTop: 28, display: "inline-flex" }}>
+          <button aria-pressed={!annual} onClick={() => setAnnual(false)}>Monthly</button>
+          <button aria-pressed={annual} onClick={() => setAnnual(true)}>Annual</button>
         </div>
-      </section>
+      </PageHero>
 
       <section className="section-tight">
         <div className="container">
@@ -104,16 +98,24 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="section" style={{ borderTop: "1px solid var(--line)" }}>
-        <div className="container-narrow">
+      <section className="om-block">
+        <div className="container">
           <Reveal>
-            <SectionHead eyebrow="Questions" title="Pricing questions." />
+            <div className="om-kicker">Questions</div>
+            <h2 className="om-h2">Pricing questions.</h2>
           </Reveal>
           <Reveal>
-            {FAQS.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
+            <div className="om-faq">
+              {FAQS.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
+            </div>
           </Reveal>
         </div>
       </section>
+
+      <CtaBand
+        title={<>Start free.<br />Decide in 14 days.</>}
+        body="Every plan starts with a 14-day free trial, no credit card required. Your data stays on your machine either way."
+      />
 
       <SiteFooter />
     </>

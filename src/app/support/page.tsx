@@ -1,4 +1,5 @@
 import { SiteNav, SiteFooter } from "../../components/site";
+import { PageHero } from "../../components/om";
 
 export const metadata = { title: "Support – Aetros Biz" };
 
@@ -22,12 +23,12 @@ export default function SupportPage() {
   return (
     <>
       <SiteNav />
+      <PageHero
+        kicker="Support"
+        title="Madad yahin se shuru karo"
+        lede="Pehle neeche common topics dekho. Zyadatar sawalon ka jawab wahi milega."
+      />
       <main className="container" style={{ maxWidth: 820, paddingTop: 48, paddingBottom: 64 }}>
-        <span className="eyebrow">Support</span>
-        <h1 style={{ fontSize: 36, margin: "8px 0" }}>Madad yahin se shuru karo</h1>
-        <p className="faint" style={{ marginBottom: 32 }}>
-          Pehle neeche common topics dekho. Zyadatar sawalon ka jawab wahi milega.
-        </p>
         <div style={{ display: "grid", gap: 12 }}>
           {topics.map(([title, body]) => (
             <div key={title} style={card}>

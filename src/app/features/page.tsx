@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { SiteNav, SiteFooter } from "../../components/site";
-import { Button, SectionHead, Reveal, DataTable, Badge } from "../../components/ui";
+import { Button, Reveal, DataTable, Badge } from "../../components/ui";
+import { PageHero, CtaBand } from "../../components/om";
 import { useCountry } from "../../components/pricing";
 import {
   CUSTOMERS, INVOICES, ORDERS, PRODUCTS,
@@ -35,17 +36,11 @@ export default function FeaturesPage() {
     <>
       <SiteNav />
 
-      <section className="section-tight" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container" style={{ paddingTop: 40 }}>
-          <Reveal>
-            <SectionHead
-              eyebrow="Product tour"
-              title="A tour of the workspace."
-              lede="Six connected workspaces, one shared set of books. This is what each one looks like in daily use, with a sample wholesale business."
-            />
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        kicker="Product tour"
+        title="A tour of the workspace."
+        lede="Six connected workspaces, one shared set of books. This is what each one looks like in daily use, with a sample wholesale business."
+      />
 
       {/* PRODUCT EXPLORER: all 63 features */}
       <section className="section">
@@ -246,6 +241,8 @@ export default function FeaturesPage() {
           </div>
         </div>
       </section>
+
+      <CtaBand />
 
       <SiteFooter />
     </>
