@@ -7,7 +7,7 @@ export function Button({
   children, variant = "primary", size, href, onClick, disabled, type, block,
 }: {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "danger";
+  variant?: "primary" | "secondary" | "ghost" | "danger" | "white";
   size?: "sm" | "lg";
   href?: string;
   onClick?: () => void;

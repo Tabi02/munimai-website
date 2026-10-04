@@ -1,235 +1,203 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SiteNav, SiteFooter } from "../components/site";
-import { ProductDemo } from "../components/demo";
-import { AppWindow } from "../components/appwindow";
-import { DataFlowSection } from "../components/dataflow";
-import { ScrollStory } from "../components/scrollstory";
-import { Button, SectionHead, Reveal, DataTable, Badge, SplashIntro } from "../components/ui";
-import { PricingTable, pricingNote, useCountry } from "../components/pricing";
-import {
-  COUNTRIES, countryByCode, detectCountryCode, priceForCountry,
-  storedCountryCode, type CountryInfo,
-} from "../lib/geo";
+import { Button, Reveal, SplashIntro } from "../components/ui";
+import { HeroScene } from "../components/hero3d";
+import { useCountry } from "../components/pricing";
 
-/* ---------- differentiator icons: hand-drawn stroke SVGs ---------- */
-function DiffIcon({ name }: { name: string }) {
-  const paths: Record<string, React.ReactNode> = {
-    local: (
-      <>
-        <rect x="3" y="4" width="18" height="12" rx="2" />
-        <path d="M9.5 10.2l1.8 1.8 3.4-3.8" />
-        <path d="M9 20h6M12 16v4" />
-      </>
-    ),
-    agents: (
-      <>
-        <path d="M10 3l1.6 4.9L16.5 9.5l-4.9 1.6L10 16l-1.6-4.9L3.5 9.5l4.9-1.6z" />
-        <circle cx="17.5" cy="17.5" r="3.5" />
-        <path d="M16 17.5l1.1 1.1 2-2.2" />
-      </>
-    ),
-    import: (
-      <>
-        <path d="M12 3v11" />
-        <path d="M7.5 10.5L12 15l4.5-4.5" />
-        <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
-      </>
-    ),
-    globe: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18" />
-        <path d="M12 3c2.8 2.7 4 5.8 4 9s-1.2 6.3-4 9c-2.8-2.7-4-5.8-4-9s1.2-6.3 4-9z" />
-      </>
-    ),
-    devices: (
-      <>
-        <rect x="2" y="5" width="13" height="9" rx="1.5" />
-        <path d="M2 17.5h13" />
-        <rect x="17" y="8.5" width="5" height="10" rx="1.2" />
-        <path d="M19.5 16.5h.01" />
-      </>
-    ),
-    code: (
-      <>
-        <path d="M8.5 8L4 12l4.5 4" />
-        <path d="M15.5 8l4.5 4-4.5 4" />
-        <path d="M13.5 5l-3 14" />
-      </>
-    ),
-  };
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
-      aria-hidden="true">
-      {paths[name]}
-    </svg>
-  );
-}
+/* ---------- data ---------- */
 
-const DIFFS: Array<{ icon: string; name: string; desc: React.ReactNode; meta: string }> = [
-  {
-    icon: "local",
-    name: "Local-first, always",
-    desc: "Your database lives on your machine in a plain SQLite file. The app works fully offline, and no subscription can lock you out of your own records.",
-    meta: "SQLite · Offline",
-  },
-  {
-    icon: "agents",
-    name: "AI that asks before it acts",
-    desc: "Fourteen specialist agents read your customers, stock and accounts, then draft the next step. Nothing is sent, recorded or changed, and no money or stock moves, without your explicit approval. Every action is audit-logged.",
-    meta: "14 agents · Approval-gated",
-  },
-  {
-    icon: "import",
-    name: "Import in an afternoon",
-    desc: "Bring your customers and products with one-click CSV import and ready-made templates. No retyping years of records to get started.",
-    meta: "CSV · Templates",
-  },
-  {
-    icon: "globe",
-    name: "Built for wherever you sell",
-    desc: "Six interface languages and tax and currency presets for 25 countries. Configure GST, VAT or sales tax per country, per business.",
-    meta: "6 languages · 25 countries",
-  },
-  {
-    icon: "devices",
-    name: "Devices you control",
-    desc: "Each plan includes a set number of devices. The owner sees every connected device and decides who gets access, device by device.",
-    meta: "Owner-managed",
-  },
-  {
-    icon: "code",
-    name: "Open source, honestly",
-    desc: <>The full desktop app is published under AGPL-3.0. Read the code, audit it, run it your way: <a href="https://github.com/Tabi02/aetros-biz">github.com/Tabi02/aetros-biz</a>.</>,
-    meta: "AGPL-3.0",
-  },
-];
-
-/* ---------- module card icons: geometric tiles, accent wash ---------- */
-function ModIcon({ name }: { name: string }) {
-  const paths: Record<string, React.ReactNode> = {
-    customers: (<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3.2" /></>),
-    sales: (<><path d="M12 3l7 9-7 9-7-9z" /></>),
-    inventory: (<><path d="M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5z" /><path d="M12 12l8.2-4.75M12 12v9.5M12 12L3.8 7.25" /></>),
-    finance: (<><path d="M4 15a8 8 0 0116 0" /><path d="M4 15h16" /><path d="M12 7v2" /></>),
-    ai: (<><path d="M12 3l2.2 6.6L21 12l-6.8 2.4L12 21l-2.2-6.6L3 12l6.8-2.4z" /></>),
-    automation: (<><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 12l2.2 2.2L15.5 10" /></>),
-  };
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
-      aria-hidden="true">
-      {paths[name]}
-    </svg>
-  );
-}
-
-const MODULE_ICONS: Record<string, string> = {
-  Customers: "customers",
-  Sales: "sales",
-  Inventory: "inventory",
-  Finance: "finance",
-  "AI Workspace": "ai",
-  Automation: "automation",
-};
-
-const TRUST: Array<{ n: string; t: string }> = [
+const TRUST = [
   { n: "26", t: "Intelligence modules built in" },
   { n: "100%", t: "Offline \u2014 your data never leaves" },
   { n: "5", t: "Platform installers, one download" },
   { n: "0", t: "Monthly cloud fees required" },
 ];
 
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={`faq-item${open ? " open" : ""}`}>
-      <button className="faq-q" onClick={() => setOpen(!open)} aria-expanded={open}>
-        {q}
-        <span className="pm">{open ? "–" : "+"}</span>
-      </button>
-      {open && <div className="faq-a">{a}</div>}
-    </div>
-  );
-}
+const PILLARS = [
+  {
+    tag: "Your data",
+    name: "Stays on your computer",
+    desc: "Customers, invoices, stock \u2014 everything lives in a database on your own machine. No account needed, no silent sync, no third party ever sees it.",
+  },
+  {
+    tag: "Your AI",
+    name: "26 modules watching",
+    desc: "Digital Twin, Time Machine, cash forecast, anomaly alerts, margin intelligence. It studies your business around the clock, offline.",
+  },
+  {
+    tag: "Your call",
+    name: "Approval before action",
+    desc: "Risk scores, second opinions and a decision inbox. Nothing executes until you say yes \u2014 the audit trail remembers why.",
+  },
+];
 
-const MODULES = [
-  { name: "Customers", desc: "A complete customer workspace: records, dues, payment history and every conversation in one timeline.", meta: "CRM" },
-  { name: "Sales", desc: "Quotations, orders, invoices and payment links. Every sale traces back to its customer and its stock.", meta: "Orders · Invoices" },
-  { name: "Inventory", desc: "Stock levels, reorder points and purchase flow, kept in step with every sale you make.", meta: "Stock · Purchase" },
-  { name: "Finance", desc: "Expenses, profit and loss, and tax-aware reporting built for how small businesses actually file.", meta: "P&L · Tax" },
-  { name: "AI Workspace", desc: "Ask questions about your business in plain language. AI analyses, recommends, and waits for approval.", meta: "14 specialists" },
-  { name: "Automation", desc: "Overdue reminders, low-stock alerts and follow-ups that run themselves, with you in control.", meta: "Workflows" },
+const STEPS = [
+  {
+    n: "01",
+    name: "Install",
+    desc: "One download for Windows, Mac or Linux. Opens in seconds, works fully offline from the first launch.",
+  },
+  {
+    n: "02",
+    name: "Import",
+    desc: "Bring your Excel sheets, Tally exports or past invoices. Your digital twin builds itself in minutes.",
+  },
+  {
+    n: "03",
+    name: "Ask",
+    desc: "\u201CWhich customers are slipping?\u201D \u201CWhat should I reorder?\u201D Plain questions, evidence-backed answers, one-tap actions.",
+  },
+];
+
+const GALLERY = [
+  { name: "Business Digital Twin", desc: "A live mirror of your shop \u2014 entities, cash, stock and data quality, updated from real records.", hue: "linear-gradient(135deg,#0e6b5d,#14b8a6)" },
+  { name: "Time Machine", desc: "Rewind any day. See exactly what your business looked like, and what changed since.", hue: "linear-gradient(135deg,#1e3a5f,#3b82f6)" },
+  { name: "Decision Simulator", desc: "\u201CWhat if I raise prices 5%?\u201D Test the move on your twin before spending a rupee.", hue: "linear-gradient(135deg,#7c2d12,#ea580c)" },
+  { name: "Cash Forecast", desc: "13-week cash outlook from your own invoices and expenses. No spreadsheet needed.", hue: "linear-gradient(135deg,#3f3d56,#8b5cf6)" },
+  { name: "Anomaly Alerts", desc: "Unusual expenses, slipping customers, dying stock \u2014 flagged with evidence, not noise.", hue: "linear-gradient(135deg,#7f1d1d,#ef4444)" },
+  { name: "Plain-English Reports", desc: "Ask in your own words. Get a clean report with charts you can send to anyone.", hue: "linear-gradient(135deg,#14532d,#22c55e)" },
 ];
 
 const FAQS = [
   {
-    q: "Is my business data stored in the cloud?",
-    a: "No. Aetros Biz is local-first: your database lives on your own machine and the app works fully offline. The cloud is used only for licensing, billing and optional sync between your own devices.",
+    q: "Does my data leave my computer?",
+    a: "Never. The database lives on your machine. There is no account, no cloud sync, no telemetry of your business records.",
   },
   {
-    q: "What does the AI need from me?",
-    a: "AI features use your own API key, added once in Settings. The AI reads your business data to answer questions and draft work, but it never sends anything, records anything, or moves money without your explicit approval.",
+    q: "Do I need internet to use it?",
+    a: "No. Install once, then everything \u2014 AI included \u2014 runs offline. Internet is only needed for the one-time download.",
   },
   {
-    q: "Can I use it for more than one shop or branch?",
-    a: "Yes. Business and Scale plans support multiple devices and staff roles, and every record is tagged to the branch or counter where it belongs.",
+    q: "Will the AI take actions on its own?",
+    a: "No. Every consequential action needs your approval in the Decision Inbox, with evidence and a risk score attached.",
   },
   {
-    q: "What happens when my subscription ends?",
-    a: "Your data stays yours and stays readable on your machine. Paid features pause until you renew; nothing is locked away or deleted.",
-  },
-  {
-    q: "Do you offer refunds?",
-    a: "Yes. If the software does not work for your business, you can claim a refund within the period stated in our Refund Policy, no questions about your reasons beyond what the policy asks.",
-  },
-  {
-    q: "Which platforms are supported?",
-    a: "Windows desktop today, with macOS and Linux builds on the roadmap. Your license covers the desktop app on the devices your plan allows.",
+    q: "What does it cost?",
+    a: "The app is free to download with a 14-day demo. There are no per-seat cloud fees, ever \u2014 because there is no cloud.",
   },
 ];
 
+/* ---------- small pieces ---------- */
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion() ?? false;
+  return (
+    <div className={`om-qa${open ? " open" : ""}`}>
+      <button className="om-qa-q" onClick={() => setOpen(!open)} aria-expanded={open}>
+        {q}
+        <span className="om-qa-pm">{open ? "\u2013" : "+"}</span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="a"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.32, ease: EASE }}
+            style={{ overflow: "hidden" }}
+          >
+            <div className="om-qa-a">{a}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function GalleryCard({ g, i }: { g: (typeof GALLERY)[number]; i: number }) {
+  const reduce = useReducedMotion() ?? false;
+  return (
+    <motion.div
+      className="om-gcard"
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, delay: (i % 3) * 0.08, ease: EASE }}
+      whileHover={reduce ? undefined : { rotateX: 5, rotateY: -6, y: -6 }}
+      style={{ transformPerspective: 900 }}
+    >
+      <div className="om-gthumb" style={{ background: g.hue }}>{g.name.split(" ")[0]}</div>
+      <div className="om-gbody">
+        <b>{g.name}</b>
+        <p>{g.desc}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ---------- page ---------- */
+
 export default function LandingPage() {
-  const [country, setCountry] = useCountry();
-  const [annual, setAnnual] = useState(true);
+  const [country] = useCountry();
 
   return (
     <>
       <SplashIntro />
       <SiteNav />
 
-      {/* ---------- hero: product workspace ---------- */}
-      <section className="hero">
-        <div className="container hero-grid">
-          <div className="hero-enter">
-            <span className="hero-kicker"><span className="tick">●</span> Business operating system</span>
-            <h1>Your data. Your computer. <span className="accent-text">Your AI.</span></h1>
-            <p className="lede">
-              Aetros Biz runs your entire business \u2014 sales, inventory,
-              finance, team \u2014 on your own machine. No cloud lock-in, no
-              monthly ransom. With 26 built-in intelligence modules that think
-              with your data.
-            </p>
-            <div className="hero-cta">
-              <Button href="/register" size="lg">Start free trial</Button>
-              <Button href="/demo" variant="secondary" size="lg">See it in action</Button>
-            </div>
-            <p className="hero-note">Free 14-day trial \u00b7 No credit card \u00b7 Works fully offline</p>
-          </div>
+      {/* announcement */}
+      <div className="container">
+        <motion.div
+          className="om-pill"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE }}
+        >
+          <span><i>New</i>v0.4.6 \u2014 26 intelligence modules, now live</span>
+        </motion.div>
+      </div>
 
-          <div className="appwin-enter">
-            <AppWindow country={country} />
-            <p className="small faint" style={{ marginTop: 12 }}>
-              The actual product interface, illustrated with a sample wholesale business.
-            </p>
-          </div>
+      {/* hero */}
+      <section className="om-hero">
+        <div className="container">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE }}
+          >
+            The analyst you <em>didn\u2019t have to hire.</em>
+          </motion.h1>
+          <motion.p
+            className="om-sub"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
+          >
+            Aetros Biz runs your shop\u2019s data on your own computer. Twenty-six
+            intelligence modules watch sales, stock, cash and customers \u2014 and
+            ask your approval before acting.
+          </motion.p>
+          <motion.div
+            className="om-ctas"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.22, ease: EASE }}
+          >
+            <Button href="/download" size="lg">Download for free</Button>
+            <Button href="/features" variant="secondary" size="lg">See how it works</Button>
+          </motion.div>
+          <motion.p
+            className="om-works"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.32 }}
+          >
+            Works on <strong>Windows</strong> \u00b7 <strong>macOS</strong> \u00b7 <strong>Linux</strong>
+            {" "}\u2014 100% offline, no cloud fees
+          </motion.p>
+
+          <HeroScene country={country} />
         </div>
       </section>
 
-      {/* ---------- trust strip ---------- */}
+      {/* trust strip */}
       <section className="trust-strip" aria-label="Aetros Biz at a glance">
         <div className="container trust-grid">
           {TRUST.map((t) => (
@@ -241,247 +209,95 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ---------- interactive demo ---------- */}
-      <section className="section" style={{ borderBottom: "1px solid var(--line)" }}>
+      {/* control */}
+      <section className="om-block">
         <div className="container">
           <Reveal>
-            <SectionHead
-              eyebrow="Interactive demo"
-              title="Explore the workspace."
-              lede="Seven connected areas of the product, running on clearly labelled sample data. This is what each one looks like in daily use."
-            />
+            <div className="om-kicker">Local-first control</div>
+            <h2 className="om-h2">The first insight is AI.<br />The final call is yours.</h2>
+            <p className="om-lead">Aetros Biz never uploads your data, never acts without permission. Every recommendation arrives with evidence \u2014 you approve, then it runs.</p>
           </Reveal>
-          <ProductDemo country={country} />
-        </div>
-      </section>
-
-      {/* ---------- scroll story: how it works ---------- */}
-      <section className="section" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container">
-          <ScrollStory />
-        </div>
-      </section>
-
-      {/* ---------- business data flow ---------- */}
-      <section className="section" style={{ borderBottom: "1px solid var(--line)" }}>
-        <div className="container">
-          <DataFlowSection />
-        </div>
-      </section>
-
-      {/* ---------- module directory: dense rows, not cards ---------- */}
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <SectionHead
-              eyebrow="The system"
-              title="Everything a small business runs on, in one place."
-              lede="Six connected workspaces share the same customers, products and money. Enter something once and it is everywhere it needs to be."
-            />
-          </Reveal>
-          <Reveal>
-            <div className="mod-cards">
-              {MODULES.map((m) => (
-                <a className="mod-card" href="/features" key={m.name}>
-                  <span className="mod-icon" aria-hidden="true"><ModIcon name={MODULE_ICONS[m.name] || "automation"} /></span>
-                  <h3 className="mod-card-name">{m.name}</h3>
-                  <p className="mod-card-desc">{m.desc}</p>
-                  <span className="mod-card-meta">{m.meta}</span>
-                </a>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- editorial split: sales, text + interface ---------- */}
-      <section className="section">
-        <div className="container">
-          <div className="split">
-            <Reveal>
-              <div>
-                <span className="eyebrow">Sales</span>
-                <h2>From quotation to payment, one unbroken trail.</h2>
-                <p>
-                  A quotation becomes an order, the order becomes an invoice, and the
-                  invoice is followed until it is paid. Stock moves with every step,
-                  so the numbers always agree with each other.
-                </p>
-                <ul className="spec-list">
-                  <li><strong>Quotations</strong><span>Send a quote; convert it to an invoice in one step when the customer says yes.</span></li>
-                  <li><strong>Tax-aware invoices</strong><span>GST, VAT or sales tax, configured per country and printed correctly.</span></li>
-                  <li><strong>Payment tracking</strong><span>Partial payments, dues and overdue ageing, per customer and per invoice.</span></li>
-                </ul>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <DataTable
-                caption="Sales pipeline, September 2026"
-                columns={[
-                  { key: "stage", header: "Stage" },
-                  { key: "count", header: "Open items", align: "right", mono: true },
-                  { key: "value", header: "Value", align: "right", mono: true },
-                ]}
-                rows={[
-                  { stage: <span className="t-strong">Quotations sent</span>, count: "6", value: priceForCountry(1840000, country) },
-                  { stage: <span className="t-strong">Orders confirmed</span>, count: "4", value: priceForCountry(1683260, country) },
-                  { stage: <span className="t-strong">Invoices unpaid</span>, count: "3", value: priceForCountry(1297000, country) },
-                  { stage: <span className="t-strong">Overdue</span>, count: "2", value: priceForCountry(941760, country) },
-                ]}
-              />
-              <p className="small faint" style={{ marginTop: 12 }}>
-                The overdue {priceForCountry(941760, country)} belongs to Royal Sweets, the same customer flagged in the demo above.
-              </p>
-            </Reveal>
+          <div className="om-cols3">
+            {PILLARS.map((p, i) => (
+              <motion.div
+                key={p.tag}
+                className="om-col"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
+              >
+                <span className="om-tag">{p.tag}</span>
+                <h4>{p.name}</h4>
+                <p>{p.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ---------- AI: inside the system ---------- */}
-      <section className="section">
+      {/* steps */}
+      <section className="om-block">
         <div className="container">
-          <div className="split flip">
-            <Reveal>
-              <div className="ai-flow">
-                <div className="ai-msg user-msg">
-                  <span className="who">You</span>
-                  Which products should I reorder this week?
-                </div>
-                <div className="ai-msg">
-                  <span className="who">Aetros · Inventory Manager</span>
-                  Two products are below reorder level. Mustard Oil 15L sells about 9 units a week and has 4 weeks of cover left.
-                  <div className="rec">
-                    <strong>Recommendation:</strong> raise a purchase order for 60 units of Mustard Oil 15L and 40 units of Tea Powder 1kg.
-                    <div className="ai-approve">
-                      <button className="btn btn-primary btn-sm" type="button">Approve purchase order</button>
-                      <button className="btn btn-secondary btn-sm" type="button">Adjust quantities</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <div>
-                <span className="eyebrow">AI workspace</span>
-                <h2>AI that works inside your business.</h2>
-                <p>
-                  Fourteen specialist assistants read your actual customers, stock and
-                  accounts, then recommend the next step. Every recommendation waits
-                  for your approval before anything happens.
-                </p>
-                <ul className="spec-list">
-                  <li><strong>Grounded in your data</strong><span>Answers come from your records, never from guesswork.</span></li>
-                  <li><strong>Approval first</strong><span>Drafts, messages and orders pause for a human decision.</span></li>
-                  <li><strong>Audit trail</strong><span>Every AI action is logged with who approved it and when.</span></li>
-                </ul>
-                <div style={{ marginTop: 24 }}>
-                  <Button href="/features#ai-workspace" variant="secondary">Explore the AI workspace</Button>
-                </div>
-              </div>
-            </Reveal>
+          <Reveal>
+            <div className="om-kicker">A shorter path</div>
+            <h2 className="om-h2">Data in. Decisions out.</h2>
+          </Reveal>
+          <div className="om-steps">
+            {STEPS.map((s, i) => (
+              <motion.div
+                key={s.n}
+                className="om-step"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
+              >
+                <div className="om-sn">{s.n}</div>
+                <h4>{s.name}</h4>
+                <p>{s.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ---------- local-first: structured facts ---------- */}
-      <section className="section">
+      {/* gallery */}
+      <section className="om-block">
         <div className="container">
-          <div className="split-narrow">
-            <Reveal>
-              <div>
-                <span className="eyebrow">Ownership</span>
-                <h2>Your data stays with you.</h2>
-                <p>
-                  Aetros Biz is local-first. The database lives on your machine,
-                  the app works without internet, and your subscription never
-                  holds your records hostage.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <dl style={{ margin: 0 }}>
-                <div className="kv"><dt>Where data lives</dt><dd>SQLite database on your own machine. Full export to CSV and Excel at any time.</dd></div>
-                <div className="kv"><dt>Offline</dt><dd>Every feature works without internet: billing, stock, reports, AI drafts.</dd></div>
-                <div className="kv"><dt>What the cloud does</dt><dd>Licensing, billing and optional sync between your own devices. Nothing else.</dd></div>
-                <div className="kv"><dt>If you leave</dt><dd>Your data remains readable on your machine. Paid features pause; nothing is deleted.</dd></div>
-              </dl>
-            </Reveal>
+          <Reveal>
+            <div className="om-kicker">Intelligence gallery</div>
+            <h2 className="om-h2">Ideas, directed.</h2>
+            <p className="om-lead">Real modules inside the app \u2014 each one earns its place by saving you time or money.</p>
+          </Reveal>
+          <div className="om-gal">
+            {GALLERY.map((g, i) => <GalleryCard key={g.name} g={g} i={i} />)}
           </div>
         </div>
       </section>
 
-      {/* ---------- differentiators ---------- */}
-      <section className="section">
+      {/* faq */}
+      <section className="om-block">
         <div className="container">
           <Reveal>
-            <SectionHead
-              eyebrow="Why Aetros Biz"
-              title="Different by design."
-              lede="Six decisions that set Aetros Biz apart from typical cloud software. Each one keeps the business, not the vendor, in control."
-            />
+            <div className="om-kicker">The essentials</div>
+            <h2 className="om-h2">Questions, answered.</h2>
           </Reveal>
-          <Reveal>
-            <div className="diff-list">
-              {DIFFS.map((d) => (
-                <div className="diff-row" key={d.name}>
-                  <span className="diff-icon" aria-hidden="true"><DiffIcon name={d.icon} /></span>
-                  <h3 className="diff-name">{d.name}</h3>
-                  <p className="diff-desc">{d.desc}</p>
-                  <span className="diff-meta">{d.meta}</span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- pricing ---------- */}
-      <section className="section" id="pricing">
-        <div className="container">
-          <Reveal>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24, flexWrap: "wrap", marginBottom: 8 }}>
-              <SectionHead
-                eyebrow="Pricing"
-                title="Choose the operating capacity your business needs."
-                lede="Per business, per month. Every plan includes the full product, local-first software and free updates."
-              />
-              <div className="bill-toggle" role="group" aria-label="Billing frequency">
-                <button aria-pressed={!annual} onClick={() => setAnnual(false)}>Monthly</button>
-                <button aria-pressed={annual} onClick={() => setAnnual(true)}>Annual</button>
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <PricingTable country={country} annual={annual} onCurrency={setCountry} />
-            <p className="small faint" style={{ marginTop: 16 }}>{pricingNote(country)}</p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- FAQ ---------- */}
-      <section className="section">
-        <div className="container-narrow">
-          <Reveal>
-            <SectionHead eyebrow="Questions" title="Asked by businesses like yours." />
-          </Reveal>
-          <Reveal>
+          <div className="om-faq">
             {FAQS.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* ---------- CTA ---------- */}
-      <section className="cta-band">
+      {/* cta band */}
+      <section className="om-block">
         <div className="container">
           <Reveal>
-            <div className="cta-panel">
-              <div>
-                <h2>Try it on your own machine.</h2>
-                <p>14 days free. Your data stays yours \u2014 always.</p>
-              </div>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <a className="btn btn-lg btn-white" href="/download">Download Aetros Biz</a>
-              </div>
+            <div className="om-cta">
+              <h2>All the intelligence.<br />None of the cloud fees.</h2>
+              <p>Aetros Biz is free while we\u2019re building. Download it, run it on your own machine, keep every rupee of insight.</p>
+              <div className="om-ticks"><span>Free download</span><span>Works offline</span><span>No account needed</span></div>
+              <Button href="/download" size="lg" variant="white">Download Aetros Biz</Button>
             </div>
           </Reveal>
         </div>
