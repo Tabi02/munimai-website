@@ -154,7 +154,7 @@ export default function LandingPage() {
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          <span><i>New</i>v0.4.6 — 26 intelligence modules, now live</span>
+          <span><i>New</i>v0.5.0 — 10 AI intelligence problems + double-entry accounting, now live</span>
         </motion.div>
       </div>
 
