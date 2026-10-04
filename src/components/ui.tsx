@@ -189,16 +189,29 @@ export function Reveal({ children, className = "", delay = 0 }: {
   );
 }
 
-/* ---------- Splash intro: animated logo on site open ---------- */
-export function SplashIntro() {
-  const [done, setDone] = useState(false);
+/* ---------- Splash intro: animated logo on site open (once per session) ---------- */
+const SPLASH_SEEN_KEY = "aetros-splash-seen";
+export function SplashIntro({ onDone }: { onDone?: () => void }) {
+  const [show, setShow] = useState(false);
+  const [leaving, setLeaving] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setDone(true), 1800);
-    return () => clearTimeout(t);
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    let seen = false;
+    try { seen = sessionStorage.getItem(SPLASH_SEEN_KEY) === "1"; } catch { /* ignore */ }
+    if (seen || reduce) { onDone?.(); return; }
+    setShow(true);
+    const t1 = setTimeout(() => setLeaving(true), 850);
+    const t2 = setTimeout(() => {
+      try { sessionStorage.setItem(SPLASH_SEEN_KEY, "1"); } catch { /* ignore */ }
+      setShow(false);
+      onDone?.();
+    }, 1150);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (done) return null;
+  if (!show) return null;
   return (
-    <div className={`splash-intro${done ? " splash-out" : ""}`} aria-hidden>
+    <div className={`splash-intro${leaving ? " splash-out" : ""}`} aria-hidden>
       <div className="splash-logo">A</div>
       <div className="splash-name">Aetros <span>Biz</span></div>
       <div className="splash-bar"><i /></div>

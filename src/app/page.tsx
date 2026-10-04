@@ -136,10 +136,14 @@ function GalleryCard({ g, i }: { g: (typeof GALLERY)[number]; i: number }) {
 
 export default function LandingPage() {
   const [country] = useCountry();
+  // Hero entrance waits for the brand loader (once per session; instant on repeat views)
+  const [ready, setReady] = useState(() => {
+    try { return sessionStorage.getItem("aetros-splash-seen") === "1"; } catch { return false; }
+  });
 
   return (
     <>
-      <SplashIntro />
+      <SplashIntro onDone={() => setReady(true)} />
       <SiteNav />
 
       {/* announcement */}
@@ -147,7 +151,7 @@ export default function LandingPage() {
         <motion.div
           className="om-pill"
           initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
         >
           <span><i>New</i>v0.4.6 \u2014 26 intelligence modules, now live</span>
@@ -159,7 +163,7 @@ export default function LandingPage() {
         <div className="container">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
           >
             The analyst you <em>didn\u2019t have to hire.</em>
@@ -167,7 +171,7 @@ export default function LandingPage() {
           <motion.p
             className="om-sub"
             initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
             transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
           >
             Aetros Biz runs your shop\u2019s data on your own computer. Twenty-six
@@ -177,7 +181,7 @@ export default function LandingPage() {
           <motion.div
             className="om-ctas"
             initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
             transition={{ duration: 0.9, delay: 0.22, ease: EASE }}
           >
             <Button href="/download" size="lg">Download for free</Button>
@@ -186,7 +190,7 @@ export default function LandingPage() {
           <motion.p
             className="om-works"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={ready ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.9, delay: 0.32 }}
           >
             Works on <strong>Windows</strong> \u00b7 <strong>macOS</strong> \u00b7 <strong>Linux</strong>

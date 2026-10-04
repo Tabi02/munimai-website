@@ -886,8 +886,8 @@ strong { color: var(--ink); }
 /* ---------- Splash intro animation ---------- */
 .splash-intro { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 14px;
-  background: radial-gradient(1200px 600px at 50% 30%, #0f2e2a, #071a17 70%);
-  animation: splashOut .5s ease 1.4s forwards; }
+  background: radial-gradient(1200px 600px at 50% 30%, #0f2e2a, #071a17 70%); }
+.splash-intro.splash-out { animation: splashOut .3s ease forwards; }
 .splash-logo { width: 84px; height: 84px; border-radius: 22px; display: grid; place-items: center;
   font-size: 44px; font-weight: 800; color: #fff;
   background: linear-gradient(135deg, #14b8a6, #0e7490);
