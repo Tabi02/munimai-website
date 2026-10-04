@@ -154,7 +154,7 @@ export default function LandingPage() {
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          <span><i>New</i>v0.4.6 \u2014 26 intelligence modules, now live</span>
+          <span><i>New</i>v0.4.6 — 26 intelligence modules, now live</span>
         </motion.div>
       </div>
 
@@ -175,7 +175,7 @@ export default function LandingPage() {
             transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
           >
             Aetros Biz runs your shop's data on your own computer. Twenty-six
-            intelligence modules watch sales, stock, cash and customers \u2014 and
+            intelligence modules watch sales, stock, cash and customers — and
             ask your approval before acting.
           </motion.p>
           <motion.div
@@ -194,7 +194,7 @@ export default function LandingPage() {
             transition={{ duration: 0.9, delay: 0.32 }}
           >
             Works on <strong>Windows</strong> \u00b7 <strong>macOS</strong> \u00b7 <strong>Linux</strong>
-            {" "}\u2014 100% offline, no cloud fees
+            {" "}— 100% offline, no cloud fees
           </motion.p>
 
           <HeroScene country={country} />
