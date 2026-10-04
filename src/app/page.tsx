@@ -193,7 +193,7 @@ export default function LandingPage() {
             animate={ready ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.9, delay: 0.32 }}
           >
-            Works on <strong>Windows</strong> \u00b7 <strong>macOS</strong> \u00b7 <strong>Linux</strong>
+            Works on <strong>Windows</strong> · <strong>macOS</strong> · <strong>Linux</strong>
             {" "}— 100% offline, no cloud fees
           </motion.p>
 
@@ -219,7 +219,7 @@ export default function LandingPage() {
           <Reveal>
             <div className="om-kicker">Local-first control</div>
             <h2 className="om-h2">The first insight is AI.<br />The final call is yours.</h2>
-            <p className="om-lead">Aetros Biz never uploads your data, never acts without permission. Every recommendation arrives with evidence \u2014 you approve, then it runs.</p>
+            <p className="om-lead">Aetros Biz never uploads your data, never acts without permission. Every recommendation arrives with evidence — you approve, then it runs.</p>
           </Reveal>
           <div className="om-cols3">
             {PILLARS.map((p, i) => (
@@ -272,7 +272,7 @@ export default function LandingPage() {
           <Reveal>
             <div className="om-kicker">Intelligence gallery</div>
             <h2 className="om-h2">Ideas, directed.</h2>
-            <p className="om-lead">Real modules inside the app \u2014 each one earns its place by saving you time or money.</p>
+            <p className="om-lead">Real modules inside the app — each one earns its place by saving you time or money.</p>
           </Reveal>
           <div className="om-gal">
             {GALLERY.map((g, i) => <GalleryCard key={g.name} g={g} i={i} />)}
