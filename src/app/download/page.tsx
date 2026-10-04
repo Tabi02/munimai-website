@@ -81,12 +81,12 @@ export default function DownloadPage() {
             <div>
               <div className="mod-row" style={{ cursor: "default" }}>
                 <span className="mod-name">Windows <Badge tone="green">Available</Badge></span>
-                <p className="mod-desc">Windows 10 or later, 64-bit. Portable ZIP, about 220 MB: extract and run, no installer and no admin rights needed.</p>
+                <p className="mod-desc">Windows 10 or later, 64-bit. Portable ZIP, about 120 MB: extract and run, no installer and no admin rights needed.</p>
                 <span className="mod-meta"><Gate platform="windows" label="Download for Windows" /></span>
               </div>
               <div className="mod-row" style={{ cursor: "default" }}>
                 <span className="mod-name">macOS <Badge tone="green">Available</Badge></span>
-                <p className="mod-desc">About 400 MB. Unsigned build: on first launch, right-click the app and choose Open.</p>
+                <p className="mod-desc">About 380 MB. Unsigned build: on first launch, right-click the app and choose Open.</p>
                 <span className="mod-meta" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   <Gate platform="mac-arm64" label="Apple Silicon (M1/M2/M3)" />
                   <Gate platform="mac-x64" label="Intel Mac" />

@@ -123,6 +123,10 @@ export function prettyPrice(amount: number, currency: string): number {
   if (["JPY", "KRW", "VND", "IDR", "NGN", "PKR", "LKR", "BDT", "NPR", "PHP", "KES"].includes(currency)) {
     return Math.round(amount / 10) * 10;
   }
+  // Round to whole numbers for clean pricing ($24, not $24.17)
+  if (["USD", "EUR", "GBP", "AUD", "CAD", "SGD", "AED", "SAR"].includes(currency)) {
+    return Math.round(amount);
+  }
   if (amount >= 100) return Math.round(amount);
   return Math.round(amount * 100) / 100;
 }

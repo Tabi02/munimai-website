@@ -5,8 +5,6 @@ import { useAuth } from "../../lib/auth";
 import { api, formatINR, type Subscription, type Device } from "../../lib/api";
 import { Button, Badge, PageSkeleton } from "../../components/ui";
 
-const WIN_URL = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "https://github.com/Tabi02/munimai-website/releases/download/aetros-biz-0.2.0/aetros-biz-0.2.0-win-portable.zip";
-
 function statusTone(status: string): "green" | "amber" | "red" | "gray" {
   if (status === "active") return "green";
   if (status === "trialing" || status === "past_due") return "amber";
@@ -128,13 +126,9 @@ export default function DashboardOverview() {
           Your business data stays on your machines.
         </p>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          {WIN_URL ? (
-            <Button variant="secondary" size="sm" href={WIN_URL}>Download for Windows</Button>
-          ) : (
-            <Button variant="secondary" size="sm" disabled>Windows (coming soon)</Button>
-          )}
-          <Button variant="secondary" size="sm" disabled>macOS (coming soon)</Button>
-          <Button variant="secondary" size="sm" disabled>Linux (coming soon)</Button>
+          <Button variant="secondary" size="sm" href="/download">Download for Windows</Button>
+          <Button variant="secondary" size="sm" href="/download">Download for macOS</Button>
+          <Button variant="secondary" size="sm" href="/download">Download for Linux</Button>
         </div>
       </section>
     </>
