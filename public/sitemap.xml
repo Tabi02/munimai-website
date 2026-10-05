@@ -5,6 +5,12 @@
   <url><loc>https://aetros-biz.vercel.app/register</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://aetros-biz.vercel.app/login</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://aetros-biz.vercel.app/support</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/download</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/features</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/pricing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/security</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/license</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aetros-biz.vercel.app/cookie-policy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://aetros-biz.vercel.app/status</loc><changefreq>daily</changefreq><priority>0.4</priority></url>
   <url><loc>https://aetros-biz.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://aetros-biz.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

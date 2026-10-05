@@ -1,6 +1,6 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "Cookie Policy | Aetros Biz" };
+export const metadata = { title: "Cookie Policy | Aetros Biz", alternates: { canonical: "https://aetros-biz.vercel.app/cookie-policy" } };
 
 const sections: [string, string][] = [
   ["1. What we use", "The Aetros Biz website uses a small number of cookies and browser storage entries, and nothing more than it needs. There is no advertising on this site and we do not sell browsing data."],

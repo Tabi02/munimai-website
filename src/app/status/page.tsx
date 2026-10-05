@@ -2,7 +2,7 @@ import { SiteNav, SiteFooter } from "../../components/site";
 import { Badge } from "../../components/ui";
 import { PageHero } from "../../components/om";
 
-export const metadata = { title: "System Status – Aetros Biz" };
+export const metadata = { title: "System Status – Aetros Biz", description: "Live status of Aetros Biz services and the local-first desktop app.", alternates: { canonical: "https://aetros-biz.vercel.app/status" } };
 
 const services: Array<[string, "green" | "amber" | "gray", string]> = [
   ["Demo website", "green", "This preview site, running on temporary demo hosting"],

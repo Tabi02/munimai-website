@@ -1,6 +1,6 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "License Agreement | Aetros Biz" };
+export const metadata = { title: "License Agreement | Aetros Biz", alternates: { canonical: "https://aetros-biz.vercel.app/license" } };
 
 const sections: [string, string][] = [
   ["1. What this license covers", "This License Agreement covers the Aetros Biz desktop application and the updates we ship for it. It grants you the right to install and use the software on the number of devices your subscription plan allows, for the business named on your account."],

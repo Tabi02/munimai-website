@@ -27,12 +27,12 @@ const mono = IBM_Plex_Mono({
 const SITE_URL = "https://aetros-biz.vercel.app";
 const SITE_NAME = "Aetros Biz";
 const SITE_DESC =
-  "Aetros Biz is a business operating system for customers, sales, inventory, finance and AI-assisted workflows. Local-first desktop software with honest licensing.";
+  "Aetros Biz is a local-first business management software for Indian small businesses — GST billing, inventory management, accounting, customers and AI-assisted workflows. Your data stays on your computer.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Aetros Biz | Business Operating System",
+    default: "Aetros Biz | Local-First Business Management Software for India",
     template: "%s | Aetros Biz",
   },
   description: SITE_DESC,
@@ -40,17 +40,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: "Aetros Biz | Business Operating System",
+    url: SITE_URL,
+    title: "Aetros Biz | Local-First Business Management Software for India",
     description: SITE_DESC,
     images: [{ url: "/logo.png", width: 1183, height: 1183, alt: "Aetros Biz logo" }],
   },
   twitter: {
     card: "summary",
-    title: "Aetros Biz | Business Operating System",
+    title: "Aetros Biz | Local-First Business Management Software for India",
     description: SITE_DESC,
     images: ["/logo.png"],
   },
-  alternates: { canonical: SITE_URL },
   robots: { index: true, follow: true },
 };
 

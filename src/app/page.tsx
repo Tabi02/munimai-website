@@ -143,6 +143,30 @@ export default function LandingPage() {
 
   return (
     <>
+      <link rel="canonical" href="https://aetros-biz.vercel.app/" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Aetros Biz",
+            applicationCategory: "BusinessApplication",
+            operatingSystem: "Windows",
+            url: "https://aetros-biz.vercel.app/",
+            description:
+              "Aetros Biz is a local-first business management software for Indian small businesses — GST billing, inventory management, accounting, customers and AI-assisted workflows. Your data stays on your computer.",
+            softwareVersion: "0.6.2",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "INR",
+              description: "14-day free trial; then per-business monthly plans",
+            },
+            author: { "@type": "Organization", name: "Aetros Biz", url: "https://aetros-biz.vercel.app/" },
+          }),
+        }}
+      />
       <SplashIntro onDone={() => setReady(true)} />
       <SiteNav />
 

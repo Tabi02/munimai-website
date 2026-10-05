@@ -1,6 +1,6 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "Privacy Policy | Aetros Biz" };
+export const metadata = { title: "Privacy Policy | Aetros Biz", alternates: { canonical: "https://aetros-biz.vercel.app/privacy" } };
 
 const sections: [string, string][] = [
   ["Information we collect", "Account information you provide (name, email, organization details), billing information processed by our payment provider (we never store full card numbers), license and device records (device identifiers, activation timestamps), and support communications. The desktop application may send anonymized crash reports only if you opt in."],

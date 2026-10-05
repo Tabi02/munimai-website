@@ -1,6 +1,6 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "Refund Policy | Aetros Biz" };
+export const metadata = { title: "Refund Policy | Aetros Biz", alternates: { canonical: "https://aetros-biz.vercel.app/refund-policy" } };
 
 export default function RefundPage() {
   return (

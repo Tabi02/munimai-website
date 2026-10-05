@@ -1,6 +1,6 @@
 import { LegalPage } from "../../components/legal";
 
-export const metadata = { title: "Terms of Service | Aetros Biz" };
+export const metadata = { title: "Terms of Service | Aetros Biz", alternates: { canonical: "https://aetros-biz.vercel.app/terms" } };
 
 const sections: [string, string][] = [
   ["1. Acceptance", "By creating an account, purchasing a subscription, or installing the Aetros Biz desktop application, you agree to these Terms of Service and to our Privacy Policy. If you do not agree, do not use the service."],
