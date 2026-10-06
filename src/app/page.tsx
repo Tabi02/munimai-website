@@ -156,7 +156,7 @@ export default function LandingPage() {
             url: "https://aetros-biz.vercel.app/",
             description:
               "Aetros Biz is a local-first business management software for Indian small businesses — GST billing, inventory management, accounting, customers and AI-assisted workflows. Your data stays on your computer.",
-            softwareVersion: "0.6.2",
+            softwareVersion: "0.7.0",
             offers: {
               "@type": "Offer",
               price: "0",
@@ -178,7 +178,7 @@ export default function LandingPage() {
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          <span><i>New</i>v0.6.2 — premium feature UI redesign, Adaptive Business OS + smarter AI errors, now live</span>
+          <span><i>New</i>v0.7.0 — security hardened, verified ERP + AI chains, backup/restore fixed, now live</span>
         </motion.div>
       </div>
 
