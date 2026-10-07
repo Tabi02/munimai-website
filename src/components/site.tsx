@@ -99,6 +99,7 @@ const FOOTER_COLS: Array<{ head: string; links: Array<{ href: string; label: str
       { href: "/terms", label: "Terms of Service" },
       { href: "/privacy", label: "Privacy Policy" },
       { href: "/refund-policy", label: "Refund Policy" },
+      { href: "/shipping-policy", label: "Shipping Policy" },
       { href: "/license", label: "License Agreement" },
       { href: "/cookie-policy", label: "Cookie Policy" },
     ],
