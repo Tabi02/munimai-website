@@ -1,5 +1,6 @@
 import { SiteNav, SiteFooter } from "../../components/site";
 import { PageHero } from "../../components/om";
+import ContactForm from "./contact-form";
 
 export const metadata = { title: "Support – Aetros Biz", description: "Get help with Aetros Biz: license activation, billing, updates, backup and AI setup guides.", alternates: { canonical: "https://aetros-biz.vercel.app/support" } };
 
@@ -38,11 +39,11 @@ export default function SupportPage() {
           ))}
         </div>
         <div style={{ ...card, padding: 24, marginTop: 24 }}>
-          <h2 style={{ fontSize: 17, margin: "0 0 8px" }}>Still stuck?</h2>
-          <p className="faint" style={{ margin: 0, fontSize: 15 }}>
-            Direct email support is not set up yet. Until then, ask in the
-            Community section of the desktop app — the team and other users help out there.
+          <h2 style={{ fontSize: 17, margin: "0 0 8px" }}>Still stuck? Message us.</h2>
+          <p className="faint" style={{ margin: "0 0 20px", fontSize: 15 }}>
+            Send a message below — it lands directly in our inbox.
           </p>
+          <ContactForm />
         </div>
       </main>
       <SiteFooter />
